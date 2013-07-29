@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dataalps</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #f0f0f0;
+				margin: 0px;
+				overflow: hidden;
+				
+				background: #feccb1; /* Old browsers */
+				background: -moz-linear-gradient(top,  #feccb1 0%, #f17432 36%, #aa0552 66%, #3d172c 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feccb1), color-stop(36%,#f17432), color-stop(66%,#aa0552), color-stop(100%,#3d172c)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  #feccb1 0%,#f17432 36%,#aa0552 66%,#3d172c 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  #feccb1 0%,#f17432 36%,#aa0552 66%,#3d172c 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  #feccb1 0%,#f17432 36%,#aa0552 66%,#3d172c 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  #feccb1 0%,#f17432 36%,#aa0552 66%,#3d172c 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feccb1', endColorstr='#3d172c',GradientType=0 ); /* IE6-9 */
+			}
+			.help {
+				position:absolute;
+				bottom:0px;
+				height:3em; width:100%;
+				padding:0.5em;
+				font-family: Monospace;
+				background:#fff;
+				opacity:0.8;
+				color:#000;
+				font-weight:bold;
+				font-size:90%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="help" id="helpbox">
+			<button class="close" onclick="document.getElementById('helpbox').style.display = 'none';">&times;</button>
+			move mouse to turn, click to fly, right click backwards
+		</div>
+
+		<script src="lib/three/three.min.js"></script>
+		<script src="lib/three/libs/stats.min.js"></script>
+		<script src="lib/three/controls/FirstPersonControls.js"></script>
+		<script src="lib/three/controls/OrbitControls.js"></script>
+		<script src="lib/three/Detector.js"></script>
+		
+		<script src="lib/d3/d3.v2.js"></script>
+		<script src="lib/d3/d3-threeD.js"></script>
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="lib/jquery-1.9.1.min.js"><\/script>')</script>
+		
+		<script src="js/fit-projection.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
