@@ -75,18 +75,24 @@ function renderFeatures(proj, features, scene, isState) {
 	if (feature.geometry.type != 'MultiPolygon') {
 	  polygons = [polygons];
 	}
-
+	
 	$.each(polygons, function(i, poly) {
 	  var shape = new THREE.Shape(poly[0]);
+	  //var centr = computeCentroid(poly[0]);
 
 	  if (poly.length > 1) {
 		shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
 	  }
 
-	  var geom = new THREE.ExtrudeGeometry(shape, { amount: 20, bevelEnabled: false });
+	  var geom = new THREE.ExtrudeGeometry(shape, { 
+			amount: 20, 
+			bevelEnabled: true,
+			bevelThickness: 40,
+			bevelSegments: 1
+		});
 	  var c = new THREE.Mesh(geom, 
 				new THREE.MeshLambertMaterial({
-					wireframe: true,
+					//wireframe: true,
 					color: colors[shapeGroup.length % colors.length] }) );
 
 	  c.rotation.z = Math.PI;
