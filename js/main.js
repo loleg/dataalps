@@ -93,8 +93,8 @@ function renderFeatures(proj, features, scene, isState) {
 					//wireframe: true,
 					color: colors[shapeGroup.length % colors.length] }) );
 	
-	  //c.rotation.z = Math.PI;
-	  //c.rotation.y = Math.PI;
+	  c.rotation.z = Math.PI;
+	  c.rotation.y = Math.PI;
 	  //c.translateX(-290);
 	  //c.translateZ(50);
 	  //c.translateY(5);
@@ -107,19 +107,20 @@ function renderFeatures(proj, features, scene, isState) {
 		var centerY = geometry.boundingBox.min.y + 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
  
 	  var points = [
-			new THREE.Vector3( 0, 0, 0 ),
-			new THREE.Vector3( 0, 10, 0 ),
-			new THREE.Vector3( 10, 10, 0 ),
-			new THREE.Vector3( 10, 0, 0 ),
-			new THREE.Vector3( 5, 5, 10 )
+			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.min.y, 0 ),
+			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.max.y, 0 ),
+			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.max.y, 0 ),
+			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
+			new THREE.Vector3( centerX, centerY, 20 + (Math.random()*10) )
 		];
 		
 	  var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
 				new THREE.MeshLambertMaterial({
-					wireframe: true,
+					wireframe: false, transparent: true, opacity: 0.8, 
 					color: colors[shapeGroup.length % colors.length] }) );
-	  g.position.set( centerX, centerY, 30 );			
-	  //g.rotation.z = Math.PI;
+	  //g.position.set( centerX, centerY, 30 );		
+	  g.position.z = 0;	
+	  g.rotation.z = Math.PI;
 	  //g.rotation.y = Math.PI;
 	  scene.add(g);
 	  
@@ -173,6 +174,8 @@ function init(data) {
 	camera.position.set(grp[0].position.x, grp[0].position.y, grp[0].position.z + 200);
 	camera.lookAt(grp[0]);
 	
+	camera.position.set(1.4687671679182006, -71.28077435822361, 35.043722996101515);
+	camera.rotation.set(1.113867604028361, 0.018489399107508256, -0.037588554750521384);
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize( window.innerWidth, window.innerHeight );
