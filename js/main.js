@@ -83,24 +83,30 @@ function renderFeatures(proj, features, scene, isState) {
 	  if (poly.length > 1) {
 		shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
 	  }
-
+		
+	  var g = new THREE.Mesh(shape.makeGeometry(), 
+				new THREE.MeshLambertMaterial({
+					wireframe: true,
+					color: colors[shapeGroup.length % colors.length] }) );
+	  g.rotation.z = Math.PI;
+	  g.rotation.y = Math.PI;
+	  g.position.z = 11;
+	  scene.add(g);
+	
 	  var geom = new THREE.ExtrudeGeometry(shape, { 
 			amount: 20, 
-			bevelEnabled: true,
-			bevelThickness: 40,
-			bevelSegments: 1
+			bevelEnabled: false
 		});
 	  var c = new THREE.Mesh(geom, 
 				new THREE.MeshLambertMaterial({
 					//wireframe: true,
 					color: colors[shapeGroup.length % colors.length] }) );
-
+	
 	  c.rotation.z = Math.PI;
 	  c.rotation.y = Math.PI;
 	  //c.translateX(-290);
 	  //c.translateZ(50);
 	  //c.translateY(5);
-
 	  scene.add(c);
 	  //THREE.GeometryUtils.merge(shapeGroup, c);
 	  shapeGroup.push(c);
