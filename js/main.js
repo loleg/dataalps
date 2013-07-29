@@ -83,32 +83,46 @@ function renderFeatures(proj, features, scene, isState) {
 	  if (poly.length > 1) {
 		shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
 	  }
-		
-	  var g = new THREE.Mesh(shape.makeGeometry(), 
-				new THREE.MeshLambertMaterial({
-					wireframe: true,
-					color: colors[shapeGroup.length % colors.length] }) );
-	  g.rotation.z = Math.PI;
-	  g.rotation.y = Math.PI;
-	  g.position.z = 11;
-	  scene.add(g);
 	
-	  var geom = new THREE.ExtrudeGeometry(shape, { 
+	  var geometry = new THREE.ExtrudeGeometry(shape, { 
 			amount: 20, 
 			bevelEnabled: false
 		});
-	  var c = new THREE.Mesh(geom, 
+	  var c = new THREE.Mesh(geometry, 
 				new THREE.MeshLambertMaterial({
 					//wireframe: true,
 					color: colors[shapeGroup.length % colors.length] }) );
 	
-	  c.rotation.z = Math.PI;
-	  c.rotation.y = Math.PI;
+	  //c.rotation.z = Math.PI;
+	  //c.rotation.y = Math.PI;
 	  //c.translateX(-290);
 	  //c.translateZ(50);
 	  //c.translateY(5);
 	  scene.add(c);
 	  //THREE.GeometryUtils.merge(shapeGroup, c);
+	  
+	  	geometry.computeBoundingBox();
+
+		var centerX = geometry.boundingBox.min.x + 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+		var centerY = geometry.boundingBox.min.y + 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
+ 
+	  var points = [
+			new THREE.Vector3( 0, 0, 0 ),
+			new THREE.Vector3( 0, 10, 0 ),
+			new THREE.Vector3( 10, 10, 0 ),
+			new THREE.Vector3( 10, 0, 0 ),
+			new THREE.Vector3( 5, 5, 10 )
+		];
+		
+	  var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
+				new THREE.MeshLambertMaterial({
+					wireframe: true,
+					color: colors[shapeGroup.length % colors.length] }) );
+	  g.position.set( centerX, centerY, 30 );			
+	  //g.rotation.z = Math.PI;
+	  //g.rotation.y = Math.PI;
+	  scene.add(g);
+	  
 	  shapeGroup.push(c);
 	});
   });
