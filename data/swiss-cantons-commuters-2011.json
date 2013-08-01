@@ -1,0 +1,238 @@
+{
+  "Pendler" : [
+    {
+      "Kanton" : "Zürich",
+      "Adults" : 1161804.0000000426,
+      "Workers" : 763211.829971659,
+      "WorkingNotCommuting" : 60362.10012878049,
+      "WorkingCommuting" : 680236.147401854,
+      "Students" : 139563.42412414972,
+      "TotalCommuting" : 743886.7532536737
+    },
+    {
+      "Kanton" : "Bern / Berne",
+      "Adults" : 828793.0000000288,
+      "Workers" : 524665.2404173246,
+      "WorkingNotCommuting" : 36609.34459177688,
+      "WorkingCommuting" : 470111.18574087473,
+      "Students" : 99307.51915193115,
+      "TotalCommuting" : 514594.20492101135
+    },
+    {
+      "Kanton" : "Luzern",
+      "Adults" : 316001.9999999971,
+      "Workers" : 208301.25128818216,
+      "WorkingNotCommuting" : 14663.904570584476,
+      "WorkingCommuting" : 186417.7028108665,
+      "Students" : 42108.88182111767,
+      "TotalCommuting" : 206453.6767665956
+    },
+    {
+      "Kanton" : "Uri",
+      "Adults" : 29193.999999999825,
+      "Workers" : 18283.966509156733,
+      "WorkingNotCommuting" : 1499.6147221372617,
+      "WorkingCommuting" : 16075.494954819984,
+      "Students" : 3499.7952017956845,
+      "TotalCommuting" : 17777.260546046706
+    },
+    {
+      "Kanton" : "Schwyz",
+      "Adults" : 122659.0000000018,
+      "Workers" : 82204.06728853776,
+      "WorkingNotCommuting" : 6795.823768985656,
+      "WorkingCommuting" : 72944.87207423955,
+      "Students" : 14175.069389939727,
+      "TotalCommuting" : 79796.02741187131
+    },
+    {
+      "Kanton" : "Obwalden",
+      "Adults" : 29653.000000000393,
+      "Workers" : 20038.380804661476,
+      "WorkingNotCommuting" : 1696.5957248896498,
+      "WorkingCommuting" : 17644.265399375025,
+      "Students" : 3959.0805746234983,
+      "TotalCommuting" : 19674.474002235518
+    },
+    {
+      "Kanton" : "Nidwalden",
+      "Adults" : 34881.00000000083,
+      "Workers" : 22695.107476009573,
+      "WorkingNotCommuting" : 1720.0667593049072,
+      "WorkingCommuting" : 20193.817187677272,
+      "Students" : 4364.738860823608,
+      "TotalCommuting" : 22386.42274473539
+    },
+    {
+      "Kanton" : "Glarus",
+      "Adults" : 32882.0000000001,
+      "Workers" : 21105.219618069772,
+      "WorkingNotCommuting" : 1839.5357998347345,
+      "WorkingCommuting" : 18868.264705586633,
+      "Students" : 3894.057489838533,
+      "TotalCommuting" : 20600.667420963793
+    },
+    {
+      "Kanton" : "Zug",
+      "Adults" : 95009.9999999998,
+      "Workers" : 62359.82321947133,
+      "WorkingNotCommuting" : 4709.72416397766,
+      "WorkingCommuting" : 55605.33394965522,
+      "Students" : 11309.240955933152,
+      "TotalCommuting" : 61750.09521769875
+    },
+    {
+      "Kanton" : "Fribourg / Freiburg",
+      "Adults" : 229643.99999999788,
+      "Workers" : 145816.76323896527,
+      "WorkingNotCommuting" : 11506.189198804232,
+      "WorkingCommuting" : 127859.24406691831,
+      "Students" : 32167.418864280036,
+      "TotalCommuting" : 146944.31614280262
+    },
+    {
+      "Kanton" : "Solothurn",
+      "Adults" : 216599.00000000765,
+      "Workers" : 138529.39675793395,
+      "WorkingNotCommuting" : 9993.084998982336,
+      "WorkingCommuting" : 124606.61245319377,
+      "Students" : 25127.65688101022,
+      "TotalCommuting" : 135912.38261240404
+    },
+    {
+      "Kanton" : "Basel-Stadt",
+      "Adults" : 158613.00000000058,
+      "Workers" : 91456.20737675279,
+      "WorkingNotCommuting" : 6023.336194246235,
+      "WorkingCommuting" : 82001.85926975672,
+      "Students" : 19788.35687117063,
+      "TotalCommuting" : 92904.32006093492
+    },
+    {
+      "Kanton" : "Basel-Landschaft",
+      "Adults" : 232600.00000000236,
+      "Workers" : 136685.95127603292,
+      "WorkingNotCommuting" : 8913.620051942233,
+      "WorkingCommuting" : 123709.23594704599,
+      "Students" : 28099.92888253946,
+      "TotalCommuting" : 139230.9740292051
+    },
+    {
+      "Kanton" : "Schaffhausen",
+      "Adults" : 65017.0000000008,
+      "Workers" : 40552.08707780057,
+      "WorkingNotCommuting" : 2235.374232089059,
+      "WorkingCommuting" : 36851.9126196102,
+      "Students" : 7853.299601445311,
+      "TotalCommuting" : 40622.36595240334
+    },
+    {
+      "Kanton" : "Appenzell A.Rh.",
+      "Adults" : 44436.00000000112,
+      "Workers" : 29224.511296996923,
+      "WorkingNotCommuting" : 2311.6004560179317,
+      "WorkingCommuting" : 25989.54820377823,
+      "Students" : 5890.668177325912,
+      "TotalCommuting" : 28665.04719746938
+    },
+    {
+      "Kanton" : "Appenzell I.Rh.",
+      "Adults" : 12878.999999999982,
+      "Workers" : 8420.206285319759,
+      "WorkingNotCommuting" : 604.4558326402571,
+      "WorkingCommuting" : 7599.289555177911,
+      "Students" : 1740.2995063669596,
+      "TotalCommuting" : 8387.375444604917
+    },
+    {
+      "Kanton" : "St. Gallen",
+      "Adults" : 400542.00000000285,
+      "Workers" : 255898.20639899728,
+      "WorkingNotCommuting" : 17112.90712356399,
+      "WorkingCommuting" : 229862.0505566309,
+      "Students" : 51567.03839246852,
+      "TotalCommuting" : 254285.8613745002
+    },
+    {
+      "Kanton" : "Graubünden",
+      "Adults" : 163763.99999999983,
+      "Workers" : 104311.23746618004,
+      "WorkingNotCommuting" : 7513.097153848711,
+      "WorkingCommuting" : 92823.92367420747,
+      "Students" : 19396.18687490239,
+      "TotalCommuting" : 103348.09179922137
+    },
+    {
+      "Kanton" : "Aargau",
+      "Adults" : 516550.9999999897,
+      "Workers" : 335765.0547246317,
+      "WorkingNotCommuting" : 22616.03299457661,
+      "WorkingCommuting" : 304176.0687184548,
+      "Students" : 64974.04052756368,
+      "TotalCommuting" : 335124.1983802768
+    },
+    {
+      "Kanton" : "Thurgau",
+      "Adults" : 209960.0000000093,
+      "Workers" : 136607.6049292241,
+      "WorkingNotCommuting" : 10782.9029493466,
+      "WorkingCommuting" : 121474.04928813082,
+      "Students" : 26407.336260063315,
+      "TotalCommuting" : 134626.60907391502
+    },
+    {
+      "Kanton" : "Tessin",
+      "Adults" : 284956.99999999575,
+      "Workers" : 149115.19722746813,
+      "WorkingNotCommuting" : 10575.754792619737,
+      "WorkingCommuting" : 132371.01390448792,
+      "Students" : 30506.62080510532,
+      "TotalCommuting" : 153889.03804218656
+    },
+    {
+      "Kanton" : "Waadt",
+      "Adults" : 585680.0000000017,
+      "Workers" : 352876.1653055973,
+      "WorkingNotCommuting" : 26787.013657080744,
+      "WorkingCommuting" : 307464.97609357606,
+      "Students" : 79588.10828838778,
+      "TotalCommuting" : 355795.7994380694
+    },
+    {
+      "Kanton" : "Valais / Wallis",
+      "Adults" : 263441.99999999977,
+      "Workers" : 157881.4184875443,
+      "WorkingNotCommuting" : 10648.06074355834,
+      "WorkingCommuting" : 139391.52422597943,
+      "Students" : 32121.953390023762,
+      "TotalCommuting" : 157711.23627147448
+    },
+    {
+      "Kanton" : "Neuchâtel / Neuenburg",
+      "Adults" : 142090.0000000008,
+      "Workers" : 82693.50922024867,
+      "WorkingNotCommuting" : 5028.827787355918,
+      "WorkingCommuting" : 73530.58419797507,
+      "Students" : 17981.255597270832,
+      "TotalCommuting" : 84790.33795250348
+    },
+    {
+      "Kanton" : "Genève / Genf",
+      "Adults" : 351946.9999999992,
+      "Workers" : 195323.07965962752,
+      "WorkingNotCommuting" : 13786.151605741205,
+      "WorkingCommuting" : 169927.1832770238,
+      "Students" : 52334.19083229315,
+      "TotalCommuting" : 207199.21568492628
+    },
+    {
+      "Kanton" : "Jura",
+      "Adults" : 57957.000000002,
+      "Workers" : 33663.502995791576,
+      "WorkingNotCommuting" : 2566.526413199524,
+      "WorkingCommuting" : 29128.19101709991,
+      "Students" : 7807.173981975737,
+      "TotalCommuting" : 33833.031503229
+    }
+  ]
+}
