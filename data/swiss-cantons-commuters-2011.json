@@ -10,7 +10,7 @@
       "TotalCommuting" : 743886.7532536737
     },
     {
-      "Kanton" : "Bern / Berne",
+      "Kanton" : "Bern",
       "Adults" : 828793.0000000288,
       "Workers" : 524665.2404173246,
       "WorkingNotCommuting" : 36609.34459177688,
@@ -82,7 +82,7 @@
       "TotalCommuting" : 61750.09521769875
     },
     {
-      "Kanton" : "Fribourg / Freiburg",
+      "Kanton" : "Freiburg",
       "Adults" : 229643.99999999788,
       "Workers" : 145816.76323896527,
       "WorkingNotCommuting" : 11506.189198804232,
@@ -208,7 +208,7 @@
       "TotalCommuting" : 157711.23627147448
     },
     {
-      "Kanton" : "Neuchâtel / Neuenburg",
+      "Kanton" : "Neuenburg",
       "Adults" : 142090.0000000008,
       "Workers" : 82693.50922024867,
       "WorkingNotCommuting" : 5028.827787355918,
@@ -217,7 +217,7 @@
       "TotalCommuting" : 84790.33795250348
     },
     {
-      "Kanton" : "Genève / Genf",
+      "Kanton" : "Genf",
       "Adults" : 351946.9999999992,
       "Workers" : 195323.07965962752,
       "WorkingNotCommuting" : 13786.151605741205,

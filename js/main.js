@@ -36,13 +36,38 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 
 			init(geodata);
 			animate();
-
+			
 		});
 	});
 });
 
-function applyData(source, column, multiplier, amount) {
-	if (typeof amount == 'undefined') amount = 1;
+function toggleDataBtn(obj) {
+	var isOn = $(obj).hasClass('on');
+	$(obj).parent().parent().find('.on').removeClass('on');
+	if (isOn) {
+		clearData();
+	} else {
+		$(obj).addClass('on');
+	}
+	return !isOn;
+}
+
+$('#legendbox .population').click(function() {
+	if (toggleDataBtn(this))
+		applyData(SwissPopulationBFS, '2013', function() { return 20000 });
+});
+$('#legendbox .commuting').click(function() {
+	if (toggleDataBtn(this))
+		applyData(SwissCommutersBFS, 'TotalCommuting', 
+			function(featurename) { 
+				return 20000;
+				//var data1 = $.grep(SwissPopulationBFS, function(n) { 
+				//	return (featurename.indexOf(n.Kanton) > -1); });
+				//return parseInt(20000 / data1[0]['2011']); 
+			});
+});
+
+function applyData(source, column, multiplier) {
 	$.each(groupPyramids, function() {
 		featurename = this.name;
 		var data1 = $.grep(source, function(n) { 
@@ -53,10 +78,25 @@ function applyData(source, column, multiplier, amount) {
 			return;
 		}
 		value1 = parseInt(data1[0][column] / multiplier(featurename));
-		console.log("Applying data: " + featurename + " - " + value1);
-		
-		this.geometry.vertices[4].z = -(value1 * amount);
+		//console.log("Applying data: " + featurename + " - " + value1);
+		this.datavalue = value1;
+	});
+	dataFader = 0;
+}
+
+function renderData(amount) {
+	if (typeof amount == 'undefined') amount = dataFader;
+	$.each(groupPyramids, function() {
+		this.geometry.vertices[4].z = -(this.datavalue * amount);
 		this.geometry.verticesNeedUpdate = true;
+		
+		this.material.opacity = amount * 0.9;
+	});
+}
+
+function clearData() {
+	$.each(groupPyramids, function() {
+		this.material.opacity = 0;
 	});
 }
 
@@ -154,7 +194,7 @@ function renderFeatures(proj, features, scene, isState) {
 
 		var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
 				new THREE.MeshLambertMaterial({
-					wireframe: false, transparent: true, opacity: 0.8, 
+					wireframe: false, transparent: true, opacity: 0, 
 					color: colors[groupMap.length % colors.length] }) );
 		//g.position.set( centerX, centerY, 30 );		
 		//g.position.z = 0;	
@@ -271,8 +311,8 @@ function render() {
 	renderer.render( scene, camera );
 	
 	if (dataFader < 1) {
-		dataFader += 0.1;
-		applyData(SwissPopulationBFS, '2013', function() { return 20000 }, dataFader);
+		dataFader += 0.01 + ((dataFader)/40);
+		renderData();
 	}
 	
 }
