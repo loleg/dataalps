@@ -17,11 +17,16 @@ var windowHalfY = window.innerHeight / 2;
 
 var clock = new THREE.Clock();
 
-$.getJSON('data/swiss-cantons-simplified.json', function(data) {
+var SwissPopulationBFS = null;
+$.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
+	SwissPopulationBFS = data1.Population;
+	
+	$.getJSON('data/swiss-cantons-simplified.json', function(data2) {
 
-	init(data);
-	animate();
+		init(data2);
+		animate();
 
+	});
 });
 
 /* given a GeoJSON Feature, return a list of Vector2s
@@ -76,7 +81,20 @@ function renderFeatures(proj, features, scene, isState) {
 	  polygons = [polygons];
 	}
 	
+	// console.log(feature.properties.name);
+	
+	var data1 = -1;
+	$.each(SwissPopulationBFS, function() { 
+		if (feature.properties.name.indexOf(this.Kanton) > -1) {
+			data1 = parseInt(this['2013'] / 20000);
+		}
+	});
+	if (data1 == -1) {
+		console.log("Error: data not found for " + feature.properties.name);
+	}
+
 	$.each(polygons, function(i, poly) {
+	
 	  var shape = new THREE.Shape(poly[0]);
 	  //var centr = computeCentroid(poly[0]);
 
@@ -111,8 +129,9 @@ function renderFeatures(proj, features, scene, isState) {
 			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.max.y, 0 ),
 			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.max.y, 0 ),
 			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
-			new THREE.Vector3( centerX, centerY, 20 + (Math.random()*10) )
+			new THREE.Vector3( centerX, centerY, -data1 )
 		];
+		console.log(data1);
 		
 	  var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
 				new THREE.MeshLambertMaterial({
@@ -120,8 +139,8 @@ function renderFeatures(proj, features, scene, isState) {
 					color: colors[shapeGroup.length % colors.length] }) );
 	  //g.position.set( centerX, centerY, 30 );		
 	  g.position.z = 0;	
-	  g.rotation.z = Math.PI;
-	  //g.rotation.y = Math.PI;
+	  //g.rotation.z = Math.PI;
+	  g.rotation.x = Math.PI;
 	  scene.add(g);
 	  
 	  shapeGroup.push(c);
