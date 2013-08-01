@@ -2,6 +2,7 @@
   "Pendler" : [
     {
       "Kanton" : "Zürich",
+      "Temp": 0.41,
       "Adults" : 1161804.0000000426,
       "Workers" : 763211.829971659,
       "WorkingNotCommuting" : 60362.10012878049,
@@ -11,6 +12,7 @@
     },
     {
       "Kanton" : "Bern",
+      "Temp": 0.45,
       "Adults" : 828793.0000000288,
       "Workers" : 524665.2404173246,
       "WorkingNotCommuting" : 36609.34459177688,
@@ -20,6 +22,7 @@
     },
     {
       "Kanton" : "Luzern",
+      "Temp": 0.41,
       "Adults" : 316001.9999999971,
       "Workers" : 208301.25128818216,
       "WorkingNotCommuting" : 14663.904570584476,
@@ -29,6 +32,7 @@
     },
     {
       "Kanton" : "Uri",
+      "Temp": 0,
       "Adults" : 29193.999999999825,
       "Workers" : 18283.966509156733,
       "WorkingNotCommuting" : 1499.6147221372617,
@@ -38,6 +42,7 @@
     },
     {
       "Kanton" : "Schwyz",
+      "Temp": 0,
       "Adults" : 122659.0000000018,
       "Workers" : 82204.06728853776,
       "WorkingNotCommuting" : 6795.823768985656,
@@ -47,6 +52,7 @@
     },
     {
       "Kanton" : "Obwalden",
+      "Temp": 0,
       "Adults" : 29653.000000000393,
       "Workers" : 20038.380804661476,
       "WorkingNotCommuting" : 1696.5957248896498,
@@ -56,6 +62,7 @@
     },
     {
       "Kanton" : "Nidwalden",
+      "Temp": 0,
       "Adults" : 34881.00000000083,
       "Workers" : 22695.107476009573,
       "WorkingNotCommuting" : 1720.0667593049072,
@@ -65,6 +72,7 @@
     },
     {
       "Kanton" : "Glarus",
+      "Temp": 0,
       "Adults" : 32882.0000000001,
       "Workers" : 21105.219618069772,
       "WorkingNotCommuting" : 1839.5357998347345,
@@ -74,6 +82,7 @@
     },
     {
       "Kanton" : "Zug",
+      "Temp": 0,
       "Adults" : 95009.9999999998,
       "Workers" : 62359.82321947133,
       "WorkingNotCommuting" : 4709.72416397766,
@@ -83,6 +92,7 @@
     },
     {
       "Kanton" : "Freiburg",
+      "Temp": 0,
       "Adults" : 229643.99999999788,
       "Workers" : 145816.76323896527,
       "WorkingNotCommuting" : 11506.189198804232,
@@ -92,6 +102,7 @@
     },
     {
       "Kanton" : "Solothurn",
+      "Temp": 0,
       "Adults" : 216599.00000000765,
       "Workers" : 138529.39675793395,
       "WorkingNotCommuting" : 9993.084998982336,
@@ -101,6 +112,7 @@
     },
     {
       "Kanton" : "Basel-Stadt",
+      "Temp": 0,
       "Adults" : 158613.00000000058,
       "Workers" : 91456.20737675279,
       "WorkingNotCommuting" : 6023.336194246235,
@@ -110,6 +122,7 @@
     },
     {
       "Kanton" : "Basel-Landschaft",
+      "Temp": 0,
       "Adults" : 232600.00000000236,
       "Workers" : 136685.95127603292,
       "WorkingNotCommuting" : 8913.620051942233,
@@ -119,6 +132,7 @@
     },
     {
       "Kanton" : "Schaffhausen",
+      "Temp": 0,
       "Adults" : 65017.0000000008,
       "Workers" : 40552.08707780057,
       "WorkingNotCommuting" : 2235.374232089059,
@@ -128,6 +142,7 @@
     },
     {
       "Kanton" : "Appenzell A.Rh.",
+      "Temp": 0,
       "Adults" : 44436.00000000112,
       "Workers" : 29224.511296996923,
       "WorkingNotCommuting" : 2311.6004560179317,
@@ -137,6 +152,7 @@
     },
     {
       "Kanton" : "Appenzell I.Rh.",
+      "Temp": 0,
       "Adults" : 12878.999999999982,
       "Workers" : 8420.206285319759,
       "WorkingNotCommuting" : 604.4558326402571,
@@ -146,6 +162,7 @@
     },
     {
       "Kanton" : "St. Gallen",
+      "Temp": 0,
       "Adults" : 400542.00000000285,
       "Workers" : 255898.20639899728,
       "WorkingNotCommuting" : 17112.90712356399,
@@ -155,6 +172,7 @@
     },
     {
       "Kanton" : "Graubünden",
+      "Temp": 0,
       "Adults" : 163763.99999999983,
       "Workers" : 104311.23746618004,
       "WorkingNotCommuting" : 7513.097153848711,
@@ -164,6 +182,7 @@
     },
     {
       "Kanton" : "Aargau",
+      "Temp": 0,
       "Adults" : 516550.9999999897,
       "Workers" : 335765.0547246317,
       "WorkingNotCommuting" : 22616.03299457661,
@@ -173,6 +192,7 @@
     },
     {
       "Kanton" : "Thurgau",
+      "Temp": 0,
       "Adults" : 209960.0000000093,
       "Workers" : 136607.6049292241,
       "WorkingNotCommuting" : 10782.9029493466,
@@ -182,6 +202,7 @@
     },
     {
       "Kanton" : "Tessin",
+      "Temp": 0,
       "Adults" : 284956.99999999575,
       "Workers" : 149115.19722746813,
       "WorkingNotCommuting" : 10575.754792619737,
@@ -191,6 +212,7 @@
     },
     {
       "Kanton" : "Waadt",
+      "Temp": 0,
       "Adults" : 585680.0000000017,
       "Workers" : 352876.1653055973,
       "WorkingNotCommuting" : 26787.013657080744,
@@ -200,6 +222,7 @@
     },
     {
       "Kanton" : "Valais / Wallis",
+      "Temp": 0,
       "Adults" : 263441.99999999977,
       "Workers" : 157881.4184875443,
       "WorkingNotCommuting" : 10648.06074355834,
@@ -209,6 +232,7 @@
     },
     {
       "Kanton" : "Neuenburg",
+      "Temp": 0,
       "Adults" : 142090.0000000008,
       "Workers" : 82693.50922024867,
       "WorkingNotCommuting" : 5028.827787355918,
@@ -218,6 +242,7 @@
     },
     {
       "Kanton" : "Genf",
+      "Temp": 0,
       "Adults" : 351946.9999999992,
       "Workers" : 195323.07965962752,
       "WorkingNotCommuting" : 13786.151605741205,
@@ -227,6 +252,7 @@
     },
     {
       "Kanton" : "Jura",
+      "Temp": 0,
       "Adults" : 57957.000000002,
       "Workers" : 33663.502995791576,
       "WorkingNotCommuting" : 2566.526413199524,
