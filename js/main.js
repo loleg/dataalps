@@ -4,7 +4,9 @@ var container, stats;
 
 var camera, controls, scene, renderer;
 
-var cube, plane, grp;
+var groupMap = [], groupPyramids = [];
+
+var dataFader = 0;
 
 var targetRotation = 0;
 var targetRotationOnMouseDown = 0;
@@ -32,6 +34,25 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 
 	});
 });
+
+function applyData(source, amount) {
+	if (typeof amount == 'undefined') amount = 1;
+	$.each(groupPyramids, function() {
+		featurename = this.name;
+		var data1 = $.grep(source, function(n) { 
+			return (featurename.indexOf(n.Kanton) > -1); });
+		
+		if (data1.length == 0) {
+			console.log("[Error] Could not match " + featurename);
+			return;
+		}
+		value1 = parseInt(data1[0]['2013'] / 20000);
+		console.log("Applying data: " + featurename + " - " + value1);
+		
+		this.geometry.vertices[4].z = -(value1 * amount);
+		this.geometry.verticesNeedUpdate = true;
+	});
+}
 
 /* given a GeoJSON Feature, return a list of Vector2s
  * describing where to draw the feature, using the provided projection. */
@@ -77,82 +98,69 @@ function multiPolygonPath(proj, polys) {
 function renderFeatures(proj, features, scene, isState) {
   var colors = [ 0xa95352 ];
   
-  var shapeGroup = [];
-
   $.each(features, function(i, feature) {
 	var polygons = path(proj, feature);
 	if (feature.geometry.type != 'MultiPolygon') {
 	  polygons = [polygons];
 	}
-	
-	// console.log(feature.properties.name);
-	
-	var data1 = -1;
-	$.each(SwissPopulationBFS, function() { 
-		if (feature.properties.name.indexOf(this.Kanton) > -1) {
-			data1 = parseInt(this['2013'] / 20000);
+	var poly = polygons[0];
+	//$.each(polygons, function(i, poly) {
+		var shape = new THREE.Shape(poly[0]);
+		//var centr = computeCentroid(poly[0]);
+
+		if (poly.length > 1) {
+			shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
 		}
-	});
-	if (data1 == -1) {
-		console.log("Error: data not found for " + feature.properties.name);
-	}
 
-	$.each(polygons, function(i, poly) {
-	
-	  var shape = new THREE.Shape(poly[0]);
-	  //var centr = computeCentroid(poly[0]);
-
-	  if (poly.length > 1) {
-		shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
-	  }
-	
-	  var geometry = new THREE.ExtrudeGeometry(shape, { 
+		var geometry = new THREE.ExtrudeGeometry(shape, { 
 			amount: 20, 
 			bevelEnabled: false
 		});
-	  var c = new THREE.Mesh(geometry, 
+		var c = new THREE.Mesh(geometry, 
 				new THREE.MeshLambertMaterial({
 					//wireframe: true,
-					color: colors[shapeGroup.length % colors.length] }) );
-	
+					color: colors[groupMap.length % colors.length] }) );
+
 		c.rotation.x = Math.PI/2;
-	  //c.rotation.z = Math.PI;
-	  //c.rotation.y = Math.PI;
-	  //c.translateX(-290);
-	  //c.translateZ(50);
-	  //c.translateY(5);
-	  scene.add(c);
-	  //THREE.GeometryUtils.merge(shapeGroup, c);
-	  
-	  	geometry.computeBoundingBox();
+		//c.rotation.z = Math.PI;
+		//c.rotation.y = Math.PI;
+		//c.translateX(-290);
+		//c.translateZ(50);
+		//c.translateY(5);
+		c.matrixAutoUpdate = false;
+		c.updateMatrix();
+		scene.add(c);
+		//THREE.GeometryUtils.merge(groupMap, c);
+		groupMap.push(c);
+
+		geometry.computeBoundingBox();
 
 		var centerX = geometry.boundingBox.min.x + 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
 		var centerY = geometry.boundingBox.min.y + 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
- 
-	  var points = [
+
+		var points = [
 			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.min.y, 0 ),
 			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.max.y, 0 ),
 			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.max.y, 0 ),
 			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
-			new THREE.Vector3( centerX, centerY, -data1 )
+			new THREE.Vector3( centerX, centerY, -1 )
 		];
-		//console.log(data1);
-		
-	  var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
+
+		var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
 				new THREE.MeshLambertMaterial({
 					wireframe: false, transparent: true, opacity: 0.8, 
-					color: colors[shapeGroup.length % colors.length] }) );
-	  //g.position.set( centerX, centerY, 30 );		
-	  //g.position.z = 0;	
-	  //g.rotation.z = Math.PI;
-	  g.rotation.x = Math.PI/2;
-	  scene.add(g);
-	  
-	  shapeGroup.push(c);
-	});
+					color: colors[groupMap.length % colors.length] }) );
+		//g.position.set( centerX, centerY, 30 );		
+		//g.position.z = 0;	
+		//g.rotation.z = Math.PI;
+		g.rotation.x = Math.PI/2;
+		scene.add(g);
+
+		// Assign name to this pyramid and save
+		g.name = feature.properties.name;
+		groupPyramids.push(g);
+	//});
   });
-  
-  return shapeGroup;
 }
 
 function init(data) {
@@ -191,12 +199,9 @@ function init(data) {
 	
 	var proj = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
 	
-	grp = renderFeatures(proj, data.features, scene, false);
-	
-	//scene.add(grp);
-	
-	camera.position.set(grp[0].position.x, grp[0].position.y, grp[0].position.z + 200);
-	camera.lookAt(grp[0]);
+	renderFeatures(proj, data.features, scene, false);
+		
+	camera.lookAt(groupMap[0]);
 	
 	camera.position.set(0.3831291366180984, 86.37152933913376, 109.75796689218083);
 	camera.rotation.set(-0.6667187067008896, 0.002743155876198529, 0.0021586578725886407);
@@ -258,5 +263,10 @@ function render() {
 	*/
 	
 	renderer.render( scene, camera );
+	
+	if (dataFader < 1) {
+		dataFader += 0.1;
+		applyData(SwissPopulationBFS, dataFader);
+	}
 	
 }
