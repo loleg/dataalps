@@ -17,6 +17,10 @@ var windowHalfY = window.innerHeight / 2;
 
 var clock = new THREE.Clock();
 
+setTimeout(function() {
+	$('#helpbox').fadeOut();
+}, 6000);
+
 var SwissPopulationBFS = null;
 $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 	SwissPopulationBFS = data1.Population;
