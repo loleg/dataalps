@@ -71,7 +71,7 @@ function multiPolygonPath(proj, polys) {
 /* for each feature, find it's X/Y Path, create shape(s) with the required holes,
  * and extrude the shape */
 function renderFeatures(proj, features, scene, isState) {
-  var colors = [ 0x33ccff, 0x33595B, 0x566999, 0x162978 ];
+  var colors = [ 0xa95352 ];
   
   var shapeGroup = [];
 
@@ -111,8 +111,9 @@ function renderFeatures(proj, features, scene, isState) {
 					//wireframe: true,
 					color: colors[shapeGroup.length % colors.length] }) );
 	
-	  c.rotation.z = Math.PI;
-	  c.rotation.y = Math.PI;
+		c.rotation.x = Math.PI/2;
+	  //c.rotation.z = Math.PI;
+	  //c.rotation.y = Math.PI;
 	  //c.translateX(-290);
 	  //c.translateZ(50);
 	  //c.translateY(5);
@@ -131,16 +132,16 @@ function renderFeatures(proj, features, scene, isState) {
 			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
 			new THREE.Vector3( centerX, centerY, -data1 )
 		];
-		console.log(data1);
+		//console.log(data1);
 		
 	  var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
 				new THREE.MeshLambertMaterial({
 					wireframe: false, transparent: true, opacity: 0.8, 
 					color: colors[shapeGroup.length % colors.length] }) );
 	  //g.position.set( centerX, centerY, 30 );		
-	  g.position.z = 0;	
+	  //g.position.z = 0;	
 	  //g.rotation.z = Math.PI;
-	  g.rotation.x = Math.PI;
+	  g.rotation.x = Math.PI/2;
 	  scene.add(g);
 	  
 	  shapeGroup.push(c);
@@ -170,13 +171,13 @@ function init(data) {
 	
 	// lights
 	
-	scene.add( new THREE.AmbientLight( 0x999999 ) );
+	scene.add( new THREE.AmbientLight( 0x555555 ) );
 	
-	pointLight = new THREE.PointLight( 0xffffff, 1 );
-	pointLight.position.z = 50;
+	pointLight = new THREE.PointLight( 0xffffff, 2 );
+	pointLight.position.y = 150;
 	scene.add( pointLight );
 
-	scene.fog = new THREE.FogExp2(0xD6F1FF, 0.0005);
+	scene.fog = new THREE.FogExp2(0xa95352, 0.0005);
 		
 	// textures
 	
@@ -193,8 +194,8 @@ function init(data) {
 	camera.position.set(grp[0].position.x, grp[0].position.y, grp[0].position.z + 200);
 	camera.lookAt(grp[0]);
 	
-	camera.position.set(1.4687671679182006, -71.28077435822361, 35.043722996101515);
-	camera.rotation.set(1.113867604028361, 0.018489399107508256, -0.037588554750521384);
+	camera.position.set(0.3831291366180984, 86.37152933913376, 109.75796689218083);
+	camera.rotation.set(-0.6667187067008896, 0.002743155876198529, 0.0021586578725886407);
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize( window.innerWidth, window.innerHeight );
