@@ -8,7 +8,7 @@ var pppengine = null;
 
 var groupMap = [], groupPyramids = [];
 
-var dataFader = 0;
+var dataFader = 0, clearFader = 0;
 
 var targetRotation = 0;
 var targetRotationOnMouseDown = 0;
@@ -44,37 +44,11 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 });
 
 function toggleDataBtn(obj) {
-
-	if (pppengine != null) pppengine.destroy();
-	pppengine = new ParticleEngine();
-	pppengine.setValues({
-		positionStyle  : Type.SPHERE,
-		positionBase   : new THREE.Vector3( -100+(200*Math.random()), 100, -100 +(200*Math.random()) ),
-		positionRadius : 10,
-		
-		velocityStyle  : Type.SPHERE,
-		speedBase      : 45,
-		speedSpread    : 10,
-		
-		accelerationBase : new THREE.Vector3( 0, -80, 0 ),
-		
-		particleTexture : THREE.ImageUtils.loadTexture( 'images/spark.png' ),
-		
-		sizeTween    : new Tween( [0.5, 0.7, 1.3], [5, 40, 1] ),
-		opacityTween : new Tween( [0.2, 0.7, 2.5], [0.75, 1, 0] ),
-		colorTween   : new Tween( [0.4, 0.8, 1.0], [ new THREE.Vector3(0,1,1), new THREE.Vector3(0,1,0.6), new THREE.Vector3(0.8, 1, 0.6) ] ),
-		blendStyle   : THREE.AdditiveBlending,  
-		
-		particlesPerSecond : 3000,
-		particleDeathAge   : 2.5,		
-		emitterDeathAge    : 0.2
-	});
-	pppengine.initialize();
-
 	var isOn = $(obj).hasClass('on');
 	$(obj).parent().parent().find('.on').removeClass('on');
 	if (isOn) {
-		clearData();
+		//clearData();
+		clearFader = 1;
 	} else {
 		$(obj).addClass('on');
 	}
@@ -83,7 +57,7 @@ function toggleDataBtn(obj) {
 
 $('#legendbox .population').click(function() {
 	if (toggleDataBtn(this))
-		applyData(SwissPopulationBFS, '2013', function() { return 28000; });
+		applyData(SwissPopulationBFS, $(this).html(), function() { return 28000; });
 });
 $('#legendbox .commuting').click(function() {
 	if (toggleDataBtn(this))
@@ -123,9 +97,10 @@ function renderData(amount) {
 	});
 }
 
-function clearData() {
+function clearData(amount) {
+	if (typeof amount == 'undefined') amount = 0;
 	$.each(groupPyramids, function() {
-		this.material.opacity = 0;
+		this.material.opacity = amount;
 	});
 }
 
@@ -313,6 +288,38 @@ function onWindowResize() {
 
 //
 
+function fireworks() {
+
+	if (pppengine != null) pppengine.destroy();
+	pppengine = new ParticleEngine();
+	pppengine.setValues({
+		positionStyle  : Type.SPHERE,
+		positionBase   : new THREE.Vector3( -100+(200*Math.random()), 100, -100 +(200*Math.random()) ),
+		positionRadius : 10,
+		
+		velocityStyle  : Type.SPHERE,
+		speedBase      : 45,
+		speedSpread    : 10,
+		
+		accelerationBase : new THREE.Vector3( 0, -80, 0 ),
+		
+		particleTexture : THREE.ImageUtils.loadTexture( 'images/spark.png' ),
+		
+		sizeTween    : new Tween( [0.5, 0.7, 1.3], [5, 40, 1] ),
+		opacityTween : new Tween( [0.2, 0.7, 2.5], [0.75, 1, 0] ),
+		colorTween   : new Tween( [0.4, 0.8, 1.0], [ new THREE.Vector3(0,1,1), new THREE.Vector3(0,1,0.6), new THREE.Vector3(0.8, 1, 0.6) ] ),
+		blendStyle   : THREE.AdditiveBlending,  
+		
+		particlesPerSecond : 3000,
+		particleDeathAge   : 2.5,		
+		emitterDeathAge    : 0.2
+	});
+	pppengine.initialize();
+
+	setTimeout(fireworks, 4000 + (3000 * Math.random()));
+}
+setTimeout(fireworks, 6000);
+
 //
 
 function animate() {
@@ -348,6 +355,11 @@ function render() {
 	if (dataFader < 1) {
 		dataFader += 0.01 + ((dataFader)/40);
 		renderData();
+	}
+	
+	if (clearFader > 0) {
+		clearFader -= 0.05;
+		clearData(clearFader);
 	}
 	
 }

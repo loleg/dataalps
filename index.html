@@ -20,13 +20,21 @@
 				background: linear-gradient(to bottom,  #eeeeee 0%, #cccccc 66%,#3d3d3d 100%); /* W3C */
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#3d3d3d',GradientType=0 ); /* IE6-9 */
 			}
+			
+			#oldie {
+				background:#fff url(res/screenshot.jpg) no-repeat 50% 50% !important;
+				background-size: 100% auto !important;
+				width:100% !important;
+				height:100% !important;
+				position:absolute !important;
+			}
 
 			.help, .legend {
 				padding:0.5em;
 				font-family: Monospace;
 				background:#fff;
 				opacity:0.8;
-				color:#000;
+				color:#555;
 				font-weight:bold;
 				font-size:90%;
 			}
@@ -44,7 +52,7 @@
 				text-align:center;
 				opacity:1.0;
 				z-index:9999;
-				
+				font: 10pt sans-serif;
 			}
 			.legend img {
 				height:2em;
@@ -55,6 +63,11 @@
 				border-radius:3px; padding:5px;
 				box-shadow: inset 2px 2px 3px #fff; }
 			.legend .on { box-shadow: inset 2px 2px 3px #a95352; font-weight:bold; }
+			.legend .title {
+				margin-right: 2em;
+				display: inline;
+			}
+			.title span { font-size:11pt; color: #a95352; font-weight:bold; }
 		</style>
 	</head>
 	<body>
@@ -70,13 +83,20 @@
 			<a href="http://github.com/loleg/dataalps" target="_blank" style="float:right">
 				<img src="http://towertrack.utou.ch/images/github-256-black.png">
 			</a>
-			<button class="population">Population 2013</button>
-			<button class="commuting">Commuters in 2011</button>
+			<div class="title">
+				Swiss Data Alps |
+				<span>August 1 Edition</span>
+				| Data: <a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen.html" target="_blank">bfs.admin.ch</a>
+			</div>
+			<button class="commuting">Commuters</button>
+			Population:
+			<button class="population">2010</button>
+			<button class="population">2013</button>
+			<button class="population">2015</button>
 		</div>
 
 		<script src="lib/three/three.min.js"></script>
 		<script src="lib/three/libs/stats.min.js"></script>
-		<script src="lib/three/controls/FirstPersonControls.js"></script>
 		<script src="lib/three/controls/OrbitControls.js"></script>
 		<script src="lib/three/Detector.js"></script>
 		
