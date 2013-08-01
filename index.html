@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Dataalps</title>
+		<title>Swiss Data Alps</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -44,6 +44,11 @@
 				text-align:center;
 				opacity:1.0;
 				z-index:9999;
+				
+			}
+			.legend img {
+				height:2em;
+				padding-right:2em;
 			}
 			.legend button { 
 				border: none; background:transparent;
@@ -59,8 +64,14 @@
 		</div>
 		
 		<div class="legend" id="legendbox">
-			<button class="population">Wohnbevölkerung 2013</button>
-			<button class="commuting">Pendler 2011</button>
+			<a href="http://make.opendata.ch" target="_blank" style="float:left">
+				<img src="http://towertrack.utou.ch/images/opendata_logo2.png">
+			</a>
+			<a href="http://github.com/loleg/dataalps" target="_blank" style="float:right">
+				<img src="http://towertrack.utou.ch/images/github-256-black.png">
+			</a>
+			<button class="population">Population 2013</button>
+			<button class="commuting">Commuters in 2011</button>
 		</div>
 
 		<script src="lib/three/three.min.js"></script>
@@ -74,7 +85,9 @@
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="lib/jquery-1.9.1.min.js"><\/script>')</script>
-		
+				
+		<script src="js/ParticleEngine.js"></script>
+
 		<script src="js/fit-projection.js"></script>
 		<script src="js/main.js"></script>
 

@@ -4,6 +4,8 @@ var container, stats;
 
 var camera, controls, scene, renderer;
 
+var pppengine = null;
+
 var groupMap = [], groupPyramids = [];
 
 var dataFader = 0;
@@ -42,6 +44,33 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 });
 
 function toggleDataBtn(obj) {
+
+	if (pppengine != null) pppengine.destroy();
+	pppengine = new ParticleEngine();
+	pppengine.setValues({
+		positionStyle  : Type.SPHERE,
+		positionBase   : new THREE.Vector3( -100+(200*Math.random()), 100, -100 +(200*Math.random()) ),
+		positionRadius : 10,
+		
+		velocityStyle  : Type.SPHERE,
+		speedBase      : 45,
+		speedSpread    : 10,
+		
+		accelerationBase : new THREE.Vector3( 0, -80, 0 ),
+		
+		particleTexture : THREE.ImageUtils.loadTexture( 'images/spark.png' ),
+		
+		sizeTween    : new Tween( [0.5, 0.7, 1.3], [5, 40, 1] ),
+		opacityTween : new Tween( [0.2, 0.7, 2.5], [0.75, 1, 0] ),
+		colorTween   : new Tween( [0.4, 0.8, 1.0], [ new THREE.Vector3(0,1,1), new THREE.Vector3(0,1,0.6), new THREE.Vector3(0.8, 1, 0.6) ] ),
+		blendStyle   : THREE.AdditiveBlending,  
+		
+		particlesPerSecond : 3000,
+		particleDeathAge   : 2.5,		
+		emitterDeathAge    : 0.2
+	});
+	pppengine.initialize();
+
 	var isOn = $(obj).hasClass('on');
 	$(obj).parent().parent().find('.on').removeClass('on');
 	if (isOn) {
@@ -54,13 +83,13 @@ function toggleDataBtn(obj) {
 
 $('#legendbox .population').click(function() {
 	if (toggleDataBtn(this))
-		applyData(SwissPopulationBFS, '2013', function() { return 20000 });
+		applyData(SwissPopulationBFS, '2013', function() { return 28000; });
 });
 $('#legendbox .commuting').click(function() {
 	if (toggleDataBtn(this))
 		applyData(SwissCommutersBFS, 'TotalCommuting', 
 			function(featurename) { 
-				return 20000;
+				return 28000;
 				//var data1 = $.grep(SwissPopulationBFS, function(n) { 
 				//	return (featurename.indexOf(n.Kanton) > -1); });
 				//return parseInt(20000 / data1[0]['2011']); 
@@ -246,10 +275,12 @@ function init(data) {
 	var proj = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
 	
 	renderFeatures(proj, data.features, scene, false);
+	
+	// camera
 		
 	camera.lookAt(groupMap[0]);
 	
-	camera.position.set(0.3831291366180984, 86.37152933913376, 109.75796689218083);
+	camera.position.set(0.3831291366180984, 126.37152933913376, 139.75796689218083);
 	camera.rotation.set(-0.6667187067008896, 0.002743155876198529, 0.0021586578725886407);
 
 	renderer = new THREE.WebGLRenderer();
@@ -290,6 +321,10 @@ function animate() {
 	render();
 	stats.update();
 	controls.update();
+	
+	var dt = clock.getDelta();
+	if (pppengine != null)
+		pppengine.update( dt * 0.5 );
 
 }
 
