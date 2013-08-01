@@ -23,19 +23,25 @@ setTimeout(function() {
 	$('#helpbox').fadeOut();
 }, 6000);
 
-var SwissPopulationBFS = null;
+var SwissPopulationBFS = null,
+	SwissCommutersBFS = null;
+
 $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 	SwissPopulationBFS = data1.Population;
 	
-	$.getJSON('data/swiss-cantons-simplified.json', function(data2) {
+	$.getJSON('data/swiss-cantons-commuters-2011.json', function(data2) {
+		SwissCommutersBFS = data2.Pendler;
+		
+		$.getJSON('data/swiss-cantons-simplified.json', function(geodata) {
 
-		init(data2);
-		animate();
+			init(geodata);
+			animate();
 
+		});
 	});
 });
 
-function applyData(source, amount) {
+function applyData(source, column, multiplier, amount) {
 	if (typeof amount == 'undefined') amount = 1;
 	$.each(groupPyramids, function() {
 		featurename = this.name;
@@ -46,7 +52,7 @@ function applyData(source, amount) {
 			console.log("[Error] Could not match " + featurename);
 			return;
 		}
-		value1 = parseInt(data1[0]['2013'] / 20000);
+		value1 = parseInt(data1[0][column] / multiplier(featurename));
 		console.log("Applying data: " + featurename + " - " + value1);
 		
 		this.geometry.vertices[4].z = -(value1 * amount);
@@ -266,7 +272,7 @@ function render() {
 	
 	if (dataFader < 1) {
 		dataFader += 0.1;
-		applyData(SwissPopulationBFS, dataFader);
+		applyData(SwissPopulationBFS, '2013', function() { return 20000 }, dataFader);
 	}
 	
 }
