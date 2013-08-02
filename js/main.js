@@ -21,13 +21,11 @@ var windowHalfY = window.innerHeight / 2;
 
 var clock = new THREE.Clock();
 
-setTimeout(function() {
-	$('#helpbox').fadeOut();
-}, 6000);
-
 var SwissPopulationBFS = null,
-	SwissCommutersBFS = null;
+	SwissCommutersBFS = null,
+	SwissHeatmap = null;
 
+// Load data sources
 $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 	SwissPopulationBFS = data1.Population;
 	
@@ -43,24 +41,13 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 	});
 });
 
-function toggleDataBtn(obj) {
-	var isOn = $(obj).hasClass('on');
-	$(obj).parent().parent().find('.on').removeClass('on');
-	if (isOn) {
-		//clearData();
-		clearFader = 1;
-	} else {
-		$(obj).addClass('on');
-	}
-	return !isOn;
-}
-
+// Set up data source links
 $('#legendbox .population').click(function() {
-	if (toggleDataBtn(this))
+	if (toggleRadioBtn(this))
 		applyData(SwissPopulationBFS, $(this).html(), function() { return 28000; });
 });
 $('#legendbox .commuting').click(function() {
-	if (toggleDataBtn(this))
+	if (toggleRadioBtn(this))
 		applyData(SwissCommutersBFS, 'TotalCommuting', 
 			function(featurename) { 
 				return 28000;
@@ -70,6 +57,33 @@ $('#legendbox .commuting').click(function() {
 			});
 });
 
+// Fade out help after a few seconds
+setTimeout(function() {
+	$('#helpbox').fadeOut();
+}, 6000);
+
+// Some more UI patching
+function toggleDataBtn(obj) {
+	var isOn = $(obj).hasClass('on');
+	if (isOn) $(obj).removeClass('on');
+	else $(obj).addClass('on');
+	return !isOn;
+}
+function toggleRadioBtn(obj) {
+	var isOn = $(obj).hasClass('on');
+	$(obj).removeClass('on').parent().parent()
+		  .find('.radio.on').removeClass('on');
+	if (isOn) {
+		// Things to do when clearing radio
+		//clearData();
+		clearFader = 1;
+	} else {
+		$(obj).addClass('on');
+	}
+	return !isOn;
+}
+
+// Applies a column from a data source to the map
 function applyData(source, column, multiplier) {
 	$.each(groupPyramids, function() {
 		featurename = this.name;
@@ -87,6 +101,7 @@ function applyData(source, column, multiplier) {
 	dataFader = 0;
 }
 
+// Scales vertices of the map by amount
 function renderData(amount) {
 	if (typeof amount == 'undefined') amount = dataFader;
 	$.each(groupPyramids, function() {
@@ -97,9 +112,12 @@ function renderData(amount) {
 	});
 }
 
+// Resets the vertices
 function clearData(amount) {
 	if (typeof amount == 'undefined') amount = 0;
 	$.each(groupPyramids, function() {
+		this.geometry.vertices[4].z = -(this.datavalue * amount);
+		this.geometry.verticesNeedUpdate = true;
 		this.material.opacity = amount;
 	});
 }
@@ -213,6 +231,7 @@ function renderFeatures(proj, features, scene, isState) {
   });
 }
 
+// Main WebGL init loop
 function init(data) {
 
 	container = document.createElement( 'div' );
@@ -259,15 +278,18 @@ function init(data) {
 	camera.rotation.set(-0.6667187067008896, 0.002743155876198529, 0.0021586578725886407);
 
 	renderer = new THREE.WebGLRenderer();
+	//renderer = new THREE.CanvasRenderer();
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 	container.appendChild( renderer.domElement );
 
+	// stats
+	/*
 	stats = new Stats();
 	stats.domElement.style.position = 'absolute';
 	stats.domElement.style.top = '0px';
 	container.appendChild( stats.domElement );
-
+	*/
 	//
 
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -286,11 +308,12 @@ function onWindowResize() {
 
 }
 
-//
-
+// August 1 Special edition fireworks
+// Lee Stemkoski's Particle Engine
 function fireworks() {
 
 	if (pppengine != null) pppengine.destroy();
+	if (typeof ParticleEngine == 'undefined') return;
 	pppengine = new ParticleEngine();
 	pppengine.setValues({
 		positionStyle  : Type.SPHERE,
@@ -319,14 +342,13 @@ function fireworks() {
 	setTimeout(fireworks, 4000 + (3000 * Math.random()));
 }
 setTimeout(fireworks, 6000);
-
 //
 
 function animate() {
 
 	requestAnimationFrame( animate );
 	render();
-	stats.update();
+	//stats.update();
 	controls.update();
 	
 	var dt = clock.getDelta();
