@@ -1,371 +1,495 @@
-[
-  {
-    "ID":1940,
-    "Abbr":"BAS",
-    "Name":"Binningen, Basel",
-    "geo_longitude":7.570077,
-    "geo_latitude":47.53656,
-    "geo_accuracy":"administrative",
-    "TempTrend":0.45
+{ "type": "FeatureCollection",
+  "features": [
+   { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.570077,47.53656]},
+      "properties": {
+		"ID":1940,
+		"Abbr":"BAS",
+		"Name":"Binningen, Basel",
+		"geo_longitude":7.570077,
+		"geo_latitude":47.53656,
+		"geo_accuracy":"administrative",
+		"TempTrend":0.45
+      }
   },
-  {
-    "ID":9610,
-    "Abbr":"BEH",
-    "Name":"Passo del Bernina ",
-    "geo_longitude":10.0277942,
-    "geo_latitude":46.4109595,
-    "geo_accuracy":"mountain_pass",
-    "TempTrend":null
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [10.0277942,46.4109595]},
+      "properties": {
+		"ID":9610,
+		"Abbr":"BEH",
+		"Name":"Passo del Bernina ",
+		"geo_longitude":10.0277942,
+		"geo_latitude":46.4109595,
+		"geo_accuracy":"mountain_pass",
+		"TempTrend":null
+      }
   },
-  {
-    "ID":6965,
-    "Abbr":"BEZ",
-    "Name":"Beznau ",
-    "geo_longitude":8.2317758,
-    "geo_latitude":47.5534948,
-    "geo_accuracy":"unclassified",
-    "TempTrend":null
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.2317758,47.5534948]},
+      "properties": {
+		"ID":6965,
+		"Abbr":"BEZ",
+		"Name":"Beznau ",
+		"geo_longitude":8.2317758,
+		"geo_latitude":47.5534948,
+		"geo_accuracy":"unclassified",
+		"TempTrend":null
+      }
   },
-  {
-    "ID":7268,
-    "Abbr":"BLA",
-    "Name":"Blatten, Lötschental ",
-    "geo_longitude":7.802,
-    "geo_latitude":46.4096,
-    "geo_accuracy":"unclassified",
-    "TempTrend":0.28
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.802,46.4096]},
+      "properties": {
+		"ID":7268,
+		"Abbr":"BLA",
+		"Name":"Blatten, Lötschental ",
+		"geo_longitude":7.802,
+		"geo_latitude":46.4096,
+		"geo_accuracy":"unclassified",
+		"TempTrend":0.28
+      }
   },
-  {
-    "ID":6790,
-    "Abbr":"BUS",
-    "Name":"Buchs, Aarau ",
-    "geo_longitude":8.07565855863917,
-    "geo_latitude":47.3930087,
-    "geo_accuracy":"administrative",
-    "TempTrend":null
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.07565855863917,47.3930087]},
+      "properties": {
+		"ID":6790,
+		"Abbr":"BUS",
+		"Name":"Buchs, Aarau ",
+		"geo_longitude":8.07565855863917,
+		"geo_latitude":47.3930087,
+		"geo_accuracy":"administrative",
+		"TempTrend":null
+      }
   },
-  {
-    "ID":9870,
-    "Abbr":"BUF",
-    "Name":"Buffalora ",
-    "geo_longitude":9.0791871,
-    "geo_latitude":44.9617269,
-    "geo_accuracy":"hamlet",
-    "TempTrend":null
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.0791871,44.9617269]},
+      "properties": {
+		"ID":9870,
+		"Abbr":"BUF",
+		"Name":"Buffalora ",
+		"geo_longitude":9.0791871,
+		"geo_latitude":44.9617269,
+		"geo_accuracy":"hamlet",
+		"TempTrend":null
+      }
   },
-  {
-    "ID":8290,
-    "Abbr":"CGI",
-    "Name":"Changins, Nyon",
-    "geo_longitude":6.2350249,
-    "geo_latitude":46.4002651,
-    "geo_accuracy":"bus_stop",
-    "TempTrend":0.41
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [6.2350249,46.4002651]},
+      "properties": {
+		"ID":8290,
+		"Abbr":"CGI",
+		"Name":"Changins, Nyon",
+		"geo_longitude":6.2350249,
+		"geo_latitude":46.4002651,
+		"geo_accuracy":"bus_stop",
+		"TempTrend":0.41
+      }
   },
-  {
-    "ID":5610,
-    "Abbr":"CHD",
-    "Name":"Château-d'Oex ",
-    "geo_longitude":7.13056,
-    "geo_latitude":46.4739581,
-    "geo_accuracy":"administrative",
-    "TempTrend":null
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.13056,46.4739581]},
+      "properties": {
+		"ID":5610,
+		"Abbr":"CHD",
+		"Name":"Château-d'Oex ",
+		"geo_longitude":7.13056,
+		"geo_latitude":46.4739581,
+		"geo_accuracy":"administrative",
+		"TempTrend":null
+      }
   },
-  {
-    "ID":9090,
-    "Abbr":"COM",
-    "Name":"Acquarossa",
-    "geo_longitude":8.9422833,
-    "geo_latitude":46.4550268,
-    "geo_accuracy":"administrative",
-    "TempTrend":0.46
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.9422833,46.4550268]},
+      "properties": {
+		"ID":9090,
+		"Abbr":"COM",
+		"Name":"Acquarossa",
+		"geo_longitude":8.9422833,
+		"geo_latitude":46.4550268,
+		"geo_accuracy":"administrative",
+		"TempTrend":0.46
+      }
   },
-  {
-    "ID":9820,
-    "Abbr":"COV",
-    "Name":"Piz Corvatsch ",
-    "geo_longitude":9.8164446,
-    "geo_latitude":46.4092418,
-    "geo_accuracy":"peak",
-    "TempTrend":null
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.8164446,46.4092418]},
+      "properties": {
+		"ID":9820,
+		"Abbr":"COV",
+		"Name":"Piz Corvatsch ",
+		"geo_longitude":9.8164446,
+		"geo_latitude":46.4092418,
+		"geo_accuracy":"peak",
+		"TempTrend":null
+      }
   },
-  {
-    "ID":460,
-    "Abbr":"DAV",
-    "Name":"Davos ",
-    "geo_longitude":9.8237266,
-    "geo_latitude":46.7961744,
-    "geo_accuracy":"administrative",
-    "TempTrend":0.3
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.8237266,46.7961744]},
+      "properties": {
+		"ID":460,
+		"Abbr":"DAV",
+		"Name":"Davos ",
+		"geo_longitude":9.8237266,
+		"geo_latitude":46.7961744,
+		"geo_accuracy":"administrative",
+		"TempTrend":0.3
+      }
   },
-  {
-    "ID":60,
-    "Abbr":"DIS",
-    "Name":"Disentis",
-    "geo_longitude":8.8549785,
-    "geo_latitude":46.7041748,
-    "geo_accuracy":"administrative",
-    "TempTrend":0.37
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.8549785,46.7041748]},
+      "properties": {
+		"ID":60,
+		"Abbr":"DIS",
+		"Name":"Disentis",
+		"geo_longitude":8.8549785,
+		"geo_latitude":46.7041748,
+		"geo_accuracy":"administrative",
+		"TempTrend":0.37
+      }
   },
-  {
-    "ID":7464,
-    "Abbr":"EVO",
-    "Name":"Evolène",
-    "geo_longitude":7.4957067,
-    "geo_latitude":46.1127301,
-    "geo_accuracy":"administrative",
-    "TempTrend":0.33
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.4957067,46.1127301]},
+      "properties": {
+		"ID":7464,
+		"Abbr":"EVO",
+		"Name":"Evolène",
+		"geo_longitude":7.4957067,
+		"geo_latitude":46.1127301,
+		"geo_accuracy":"administrative",
+		"TempTrend":0.33
+      }
   },
-  {
-    "ID":8640,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [6.9509087,47.418112]},
+      "properties": {
+          "ID":8640,
     "Abbr":"FAH",
     "Name":"Fahy ",
     "geo_longitude":6.9509087,
     "geo_latitude":47.418112,
     "geo_accuracy":"administrative",
     "TempTrend":null
+      }
   },
-  {
-    "ID":6185,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [6.57488,46.840163]},
+      "properties": {
+          "ID":6185,
     "Abbr":"FRE",
     "Name":"Bullet-La Frétaz ",
     "geo_longitude":6.57488,
     "geo_latitude":46.840163,
     "geo_accuracy":"administrative",
     "TempTrend":0.4
+      }
   },
-  {
-    "ID":5740,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.09769,46.7643272]},
+      "properties": {
+          "ID":5740,
     "Abbr":"GRA",
     "Name":"Posieux, Fribourg",
     "geo_longitude":7.09769,
     "geo_latitude":46.7643272,
     "geo_accuracy":"village",
     "TempTrend":0.39
+      }
   },
-  {
-    "ID":7620,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.1706,45.8689]},
+      "properties": {
+          "ID":7620,
     "Abbr":"GSB",
     "Name":"Col du Grand St-Bernard ",
     "geo_longitude":7.1706,
     "geo_latitude":45.8689,
     "geo_accuracy":"station",
     "TempTrend":0.3
+      }
   },
-  {
-    "ID":7305,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.6163271,46.3980278]},
+      "properties": {
+          "ID":7305,
     "Abbr":"GEM",
     "Name":"Gemmipass ",
     "geo_longitude":7.6163271,
     "geo_latitude":46.3980278,
     "geo_accuracy":"station",
     "TempTrend":null
+      }
   },
-  {
-    "ID":5010,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.332288,46.571798]},
+      "properties": {
+          "ID":5010,
     "Abbr":"GRH",
     "Name":"Grimsel Hospiz ",
     "geo_longitude":8.332288,
     "geo_latitude":46.571798,
     "geo_accuracy":"bus_stop",
     "TempTrend":0.28
+      }
   },
-  {
-    "ID":1150,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.020529,47.649609]},
+      "properties": {
+          "ID":1150,
     "Abbr":"HAI",
     "Name":"Salen-Reutenen ",
     "geo_longitude":9.020529,
     "geo_latitude":47.649609,
     "geo_accuracy":"bus_stop",
     "TempTrend":null
+      }
   },
-  {
-    "ID":740,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.5567722,46.9661557]},
+      "properties": {
+          "ID":740,
     "Abbr":"LAN",
     "Name":"Landquart ",
     "geo_longitude":9.5567722,
     "geo_latitude":46.9661557,
     "geo_accuracy":"administrative",
     "TempTrend":0.43
+      }
   },
-  {
-    "ID":6480,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.80443062890914,46.9546807]},
+      "properties": {
+          "ID":6480,
     "Abbr":"LAG",
     "Name":"Langnau im Emmental",
     "geo_longitude":7.80443062890914,
     "geo_latitude":46.9546807,
     "geo_accuracy":"administrative",
     "TempTrend":0.45
+      }
   },
-  {
-    "ID":8140,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [6.6327025,46.5218269]},
+      "properties": {
+          "ID":8140,
     "Abbr":"LAU",
     "Name":"Lausanne ",
     "geo_longitude":6.6327025,
     "geo_latitude":46.5218269,
     "geo_accuracy":"administrative",
     "TempTrend":null
+      }
   },
-  {
-    "ID":7995,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [6.8535243,46.3857848]},
+      "properties": {
+          "ID":7995,
     "Abbr":"BOU",
     "Name":"Bouveret ",
     "geo_longitude":6.8535243,
     "geo_latitude":46.3857848,
     "geo_accuracy":"village",
     "TempTrend":0.28
+      }
   },
-  {
-    "ID":9400,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.6636277,46.1530725]},
+      "properties": {
+          "ID":9400,
     "Abbr":"OTL",
     "Name":"Monti, Locarno",
     "geo_longitude":8.6636277,
     "geo_latitude":46.1530725,
     "geo_accuracy":"information",
     "TempTrend":0.5
+      }
   },
-  {
-    "ID":9745,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.4017411,44.570083]},
+      "properties": {
+          "ID":9745,
     "Abbr":"LOE",
     "Name":"Vicosoprano",
     "geo_longitude":9.4017411,
     "geo_latitude":44.570083,
     "geo_accuracy":"hamlet",
     "TempTrend":0.33
+      }
   },
-  {
-    "ID":7710,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.072786,46.103115]},
+      "properties": {
+          "ID":7710,
     "Abbr":"MAB",
     "Name":"Martigny",
     "geo_longitude":7.072786,
     "geo_latitude":46.103115,
     "geo_accuracy":"administrative",
     "TempTrend":0.55
+      }
   },
-  {
-    "ID":5620,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.0171637,46.5486231]},
+      "properties": {
+          "ID":5620,
     "Abbr":"MLS",
     "Name":"Le Moléson ",
     "geo_longitude":7.0171637,
     "geo_latitude":46.5486231,
     "geo_accuracy":"peak",
     "TempTrend":null
+      }
   },
-  {
-    "ID":9928,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [10.2807896854219,46.8030561986275]},
+      "properties": {
+          "ID":9928,
     "Abbr":"NAS",
     "Name":"Naluns",
     "geo_longitude":10.2807896854219,
     "geo_latitude":46.8030561986275,
     "geo_accuracy":"gondola",
     "TempTrend":null
+      }
   },
-  {
-    "ID":6580,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [7.6003107,47.1347112]},
+      "properties": {
+          "ID":6580,
     "Abbr":"KOP",
     "Name":"Koppigen ",
     "geo_longitude":7.6003107,
     "geo_latitude":47.1347112,
     "geo_accuracy":"administrative",
     "TempTrend":0.36
+      }
   },
-  {
-    "ID":4692,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.31676982956606,47.08267825]},
+      "properties": {
+          "ID":4692,
     "Abbr":"RAT",
     "Name":"Rathausen, Emmen",
     "geo_longitude":8.31676982956606,
     "geo_latitude":47.08267825,
     "geo_accuracy":"industrial",
     "TempTrend":null
+      }
   },
-  {
-    "ID":2930,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.5068666,47.4188265]},
+      "properties": {
+          "ID":2930,
     "Abbr":"REH",
     "Name":"Affoltern, Zürich",
     "geo_longitude":8.5068666,
     "geo_latitude":47.4188265,
     "geo_accuracy":"administrative",
     "TempTrend":null
+      }
   },
-  {
-    "ID":9670,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [10.058144,46.3265034]},
+      "properties": {
+          "ID":9670,
     "Abbr":"ROB",
     "Name":"Poschiavo",
     "geo_longitude":10.058144,
     "geo_latitude":46.3265034,
     "geo_accuracy":"administrative",
     "TempTrend":null
+      }
   },
-  {
-    "ID":9295,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.5127397,46.4431919]},
+      "properties": {
+          "ID":9295,
     "Abbr":"ROE",
     "Name":"Robièi ",
     "geo_longitude":8.5127397,
     "geo_latitude":46.4431919,
     "geo_accuracy":"station",
     "TempTrend":0.28
+      }
   },
-  {
-    "ID":9849,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [9.874586,46.5332403]},
+      "properties": {
+          "ID":9849,
     "Abbr":"SAM",
     "Name":"Samedan ",
     "geo_longitude":9.874586,
     "geo_latitude":46.5332403,
     "geo_accuracy":"administrative",
     "TempTrend":null
+      }
   },
-  {
-    "ID":9130,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-117.2897652,34.1083449]},
+      "properties": {
+          "ID":9130,
     "Abbr":"SBE",
     "Name":"S. Bernardino ",
     "geo_longitude":-117.2897652,
     "geo_latitude":34.1083449,
     "geo_accuracy":"city",
     "TempTrend":0.31
+      }
   },
-  {
-    "ID":9581,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.0323521,46.2507042]},
+      "properties": {
+          "ID":9581,
     "Abbr":"SMP",
     "Name":"Simplonpass ",
     "geo_longitude":8.0323521,
     "geo_latitude":46.2507042,
     "geo_accuracy":"mountain_pass",
     "TempTrend":0.28
+      }
   },
-  {
-    "ID":9980,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [10.4248807,46.603981]},
+      "properties": {
+          "ID":9980,
     "Abbr":"SMM",
     "Name":"Sta. Maria, Val Müstair ",
     "geo_longitude":10.4248807,
     "geo_latitude":46.603981,
     "geo_accuracy":"village",
     "TempTrend":0.33
+      }
   },
-  {
-    "ID":2510,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.9064928,47.4791481]},
+      "properties": {
+          "ID":2510,
     "Abbr":"TAE",
     "Name":"Tänikon, Aadorf",
     "geo_longitude":8.9064928,
     "geo_latitude":47.4791481,
     "geo_accuracy":"hamlet",
     "TempTrend":0.42
+      }
   },
-  {
-    "ID":6130,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [6.633432,46.7824851]},
+      "properties": {
+          "ID":6130,
     "Abbr":"YVN",
     "Name":"Yverdon-les-Bains ",
     "geo_longitude":6.633432,
     "geo_latitude":46.7824851,
     "geo_accuracy":"administrative",
     "TempTrend":0.38
+      }
   },
-  {
-    "ID":2940,
+  { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [8.5878284,47.4574142]},
+      "properties": {
+          "ID":2940,
     "Abbr":"KLO",
     "Name":"Kloten, Zürich",
     "geo_longitude":8.5878284,
     "geo_latitude":47.4574142,
     "geo_accuracy":"administrative",
     "TempTrend":0.41
+  		}
   }
-]
+]}

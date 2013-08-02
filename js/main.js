@@ -2,11 +2,11 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container, stats;
 
-var camera, controls, scene, renderer;
+var camera, controls, scene, renderer, pointLight;
 
 var pppengine = null;
 
-var groupMap = [], groupPyramids = [];
+var groupMap = [], groupPyramids = [], groupLights = null;
 
 var dataFader = 0, clearFader = 0;
 
@@ -32,14 +32,19 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 	$.getJSON('data/swiss-cantons-commuters-2011.json', function(data2) {
 		SwissCommutersBFS = data2.Pendler;
 		
-		$.getJSON('data/swiss-cantons-simplified.json', function(geodata) {
+		$.getJSON('data/swiss-meteo-stations.json', function(data3) {
+			SwissHeatmap = data3;
+		
+			$.getJSON('data/swiss-cantons-simplified.json', function(geodata) {
 
-			init(geodata);
-			animate();
+				init(geodata);
+				animate();
 			
+			});
 		});
 	});
 });
+
 
 // Set up data source links
 $('#legendbox .population').click(function() {
@@ -55,6 +60,13 @@ $('#legendbox .commuting').click(function() {
 				//	return (featurename.indexOf(n.Kanton) > -1); });
 				//return parseInt(20000 / data1[0]['2011']); 
 			});
+});
+$('#legendbox .heatmap').click(function() {
+	var state = toggleDataBtn(this);
+	if (groupLights == null) return;
+	groupLights.children.forEach(function(n) { n.visible = state });
+	groupLights.visible = state;
+	pointLight.visible = !state;
 });
 
 // Fade out help after a few seconds
@@ -161,6 +173,37 @@ function multiPolygonPath(proj, polys) {
   return list;
 }
 
+// Create lights for geo-points
+function renderLights(proj, features) {
+	if (groupLights != null) return;
+	groupLights = new THREE.Object3D();
+	$.each(features, function(i, feature) {
+		var pts = proj(feature.geometry.coordinates);
+	  	var vect = new THREE.Vector2();
+		//console.log(feature.geometry.coordinates, vect);
+		
+		var intensity = feature.properties.TempTrend;
+		if (intensity != null) {
+	
+			var color = (intensity < 0.3) ? 0x00ff00 : (intensity > 0.42) ? 0xff0000 : 0xffff00;
+	
+			var sphere = new THREE.Mesh(new THREE.SphereGeometry(1,1,1), new THREE.MeshBasicMaterial({ color: color }));
+			sphere.overdraw = true;
+			sphere.position.set(pts[0], 3, pts[1]);
+			sphere.visible = false;
+			groupLights.add( sphere );
+						
+			var light = new THREE.PointLight( color, (intensity-0.3)*7 );
+			light.position.set(pts[0], 3, pts[1]);
+			light.visible = false;
+			
+			groupLights.add( light );
+		}
+	});
+	scene.add( groupLights );
+	groupLights.visible = false;
+}
+
 /* for each feature, find it's X/Y Path, create shape(s) with the required holes,
  * and extrude the shape */
 function renderFeatures(proj, features, scene, isState) {
@@ -252,13 +295,13 @@ function init(data) {
 	
 	// lights
 	
-	scene.add( new THREE.AmbientLight( 0x555555 ) );
+	scene.add( new THREE.AmbientLight( 0x333333 ) );
 	
 	pointLight = new THREE.PointLight( 0xffffff, 2 );
 	pointLight.position.y = 150;
 	scene.add( pointLight );
 
-	scene.fog = new THREE.FogExp2(0xa95352, 0.0005);
+	//scene.fog = new THREE.FogExp2(0xa95352, 0.0005);
 		
 	// textures
 	
@@ -266,10 +309,11 @@ function init(data) {
 	
 	// geometry
 	
-	var proj = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
+	var projG = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
 	
-	renderFeatures(proj, data.features, scene, false);
-	
+	renderFeatures(projG, data.features, scene, false);
+	renderLights(projG, SwissHeatmap.features);
+		
 	// camera
 		
 	camera.lookAt(groupMap[0]);

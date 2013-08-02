@@ -78,21 +78,28 @@
 		
 		<div class="legend" id="legendbox">
 			<a href="http://make.opendata.ch" target="_blank" style="float:left">
-				<img src="http://towertrack.utou.ch/images/opendata_logo2.png">
+				<img src="res/opendata_logo2.png">
 			</a>
 			<a href="http://github.com/loleg/dataalps" target="_blank" style="float:right">
-				<img src="http://towertrack.utou.ch/images/github-256-black.png">
+				<img src="res/github-256-black.png">
 			</a>
 			<div class="title">
-				Swiss Data Alps |
-				<span>August 1 Edition</span>
-				| Data: <a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen.html" target="_blank">bfs.admin.ch</a>
+				Swiss Open Data Alps |
+				<span>1 August Edition</span>
+				| Sources: 
+				<a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen.html" target="_blank">Data</a>
+				<a href="http://map.geo.admin.ch" target="_blank">Map</a>
+				<a href="http://github.com/loleg/dataalps" target="_blank">Code</a>
 			</div>
-			<button class="commuting">Commuters</button>
-			Population:
-			<button class="population">2010</button>
-			<button class="population">2013</button>
-			<button class="population">2015</button>
+			<div style="display:inline-block">
+				Population:
+				<button class="population radio">2010</button>
+				<button class="population radio">2013</button>
+				<button class="population radio">2015</button>
+				Stats:
+				<button class="commuting radio">Commuters</button>
+				<button class="heatmap">Heat Map</button>
+			</div>
 		</div>
 
 		<script src="lib/three/three.min.js"></script>
