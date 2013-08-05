@@ -55,7 +55,7 @@
 				font: 10pt sans-serif;
 			}
 			.legend img {
-				height:2em;
+				height:27px;
 				padding-right:2em;
 			}
 			.legend button { 
@@ -68,12 +68,22 @@
 				display: inline;
 			}
 			.title span { font-size:11pt; color: #a95352; font-weight:bold; }
+			.ghost {
+				    position: fixed;
+				    left: 0px;
+				    top: 0px;
+				}
 		</style>
 	</head>
 	<body>
 		<div class="help" id="helpbox">
 			<button class="close" onclick="document.getElementById('helpbox').style.display = 'none';">&times;</button>
 			Click and drag to turn, use your mousewheel to zoom
+		</div>
+
+		<div class="ghost" id="ghost">
+			<a href="http://make.opendata.ch" target="_blank"><img src="res/okcon1.png"></a><br/>
+			<a href="http://okcon.org" id="okcon" target="_blank"><img src="res/okcon2.png"></a>
 		</div>
 		
 		<div class="legend" id="legendbox">
@@ -85,21 +95,19 @@
 			</a>
 			<div class="title">
 				Swiss Open Data Alps |
-				<span>Topographic Edition</span>
-				| Sources: 
-				<a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen.html" target="_blank">Data</a>
-				<a href="http://map.geo.admin.ch" target="_blank">Map</a>
-				<a href="http://github.com/loleg/dataalps" target="_blank">Code</a>
+				<span>Topographic Edition</span> | 
+				<a href="http://github.com/loleg/dataalps" target="_blank">Source</a>
 			</div>
 			<div style="display:inline-block">
-				Map:
+				<a href="http://map.geo.admin.ch" target="_blank">Map</a>:
 				<button class="geoadmin">Swisstopo</button>
-				Population:
-				<button class="population radio">2010</button>
+				<a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen/01.html" target="_blank">Population</a>:
 				<button class="population radio">2013</button>
-				<button class="population radio">2015</button>
-				Stats:
+				<button class="population radio">2023</button>
+				<button class="population radio">2033</button>
+				<a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen/11.html" target="_blank">Stats</a>:
 				<button class="commuting radio">Commuters</button>
+				<button class="heatmap">Heat Map</button>
 			</div>
 		</div>
 
@@ -122,6 +130,7 @@
 
 		<script>
 		var map, api14, mapData, map3D = null;
+		var cantonGenf = null;
 		$(document).ready(function() {
 
 			// Initialize Swiss map
@@ -134,10 +143,10 @@
 			api14 = new GeoAdmin.API(); 
 			map = api14.createMap({ div: "map", zoom: 3 });
 
-			$('.geoadmin').click(function() {
+			var btn = $('.geoadmin').click(function() {
 				var state = toggleDataBtn(this);
 				if (map3D != null) {
-					var o = state ? 0.8 : 0;
+					var o = state ? 0.5 : 0;
 					map3D.children.forEach(function(n) { n.material.opacity = o })
 					return;
 				}
@@ -173,7 +182,7 @@
 					plane.position.x = this.x;
 					plane.position.y = 600-this.y;
 					plane.material.transparent = true;
-					plane.material.opacity = 0.8;
+					plane.material.opacity = 0.5;
 					map3D.add(plane);
 					
 				});
@@ -185,8 +194,20 @@
 				map3D.scale.set(0.37,0.37,0.37);
 							
 				scene.add(map3D);
+
+				groupMap.forEach(function(n) { if(n.name.contains('Genf')) { cantonGenf = n; } });
 			});
+
+			setTimeout(function() { btn.click(); }, 1500);
 			
+		});
+
+
+
+		$('#okcon').hover(function() {
+			cantonGenf.material.color.setHex(0x114f48);
+		}, function() {
+			cantonGenf.material.color.setHex(0xa95352);
 		});
 		
 		</script>

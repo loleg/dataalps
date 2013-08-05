@@ -214,6 +214,7 @@ function renderFeatures(proj, features, scene, isState) {
 	if (feature.geometry.type != 'MultiPolygon') {
 	  polygons = [polygons];
 	}
+	
 	var poly = polygons[0];
 	//$.each(polygons, function(i, poly) {
 		var shape = new THREE.Shape(poly[0]);
@@ -242,6 +243,9 @@ function renderFeatures(proj, features, scene, isState) {
 		c.updateMatrix();
 		scene.add(c);
 		//THREE.GeometryUtils.merge(groupMap, c);
+
+		// Assign name to this pyramid and save
+		c.name = feature.properties.name;
 		groupMap.push(c);
 
 		geometry.computeBoundingBox();
