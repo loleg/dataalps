@@ -189,12 +189,12 @@ function renderLights(proj, features) {
 	
 			var sphere = new THREE.Mesh(new THREE.SphereGeometry(1,1,1), new THREE.MeshBasicMaterial({ color: color }));
 			sphere.overdraw = true;
-			sphere.position.set(pts[0], 3, pts[1]);
+			sphere.position.set(pts[0], pts[1], -5);
 			sphere.visible = false;
 			groupLights.add( sphere );
 						
 			var light = new THREE.PointLight( color, (intensity-0.3)*7 );
-			light.position.set(pts[0], 3, pts[1]);
+			light.position.set(pts[0], pts[1], -5);
 			light.visible = false;
 			
 			groupLights.add( light );
@@ -268,7 +268,7 @@ function renderFeatures(proj, features, scene, isState) {
 		//g.position.set( centerX, centerY, 30 );		
 		//g.position.z = 0;	
 		//g.rotation.z = Math.PI;
-		//g.rotation.x = Math.PI/2;
+		g.rotation.x = Math.PI/2;
 		//g.matrix.setRotationFromEuler(g.rotation); 
 		scene.add(g);
 
@@ -288,7 +288,10 @@ function init(data) {
 	// camera
 
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 2000 );
-	//camera.position.set( 201.7, 14.5, 228 );
+
+	//camera.up = new THREE.Vector3(0,0,1);
+	camera.position.set(0.3831291366180984, 126.37152933913376, 139.75796689218083);
+	//camera.rotation.set(-0.6667187067008896, 0.002743155876198529, 0.0021586578725886407);
 	
 	// controls
 	
@@ -325,14 +328,10 @@ function init(data) {
 	
 	renderFeatures(projG, data.features, scene, false);
 	renderLights(projG, SwissHeatmap.features);
-		
-	// camera
-		
-	camera.lookAt(groupMap[0]);
-	
-	camera.position.set(0.3831291366180984, 126.37152933913376, 139.75796689218083);
-	camera.rotation.set(-0.6667187067008896, 0.002743155876198529, 0.0021586578725886407);
+	camera.lookAt(groupMap[0]);	
 
+	// renderer
+	
 	renderer = new THREE.WebGLRenderer();
 	//renderer = new THREE.CanvasRenderer();
 	renderer.setSize( window.innerWidth, window.innerHeight );
@@ -421,7 +420,10 @@ function toXYCoords(pos) {
 
 function renderOverlay() {
 	$.each(groupPyramids, function(i) {
-		var vect3 = this.geometry.vertices[4];
+		this.updateMatrixWorld();
+		var vect3 = this.geometry.vertices[4].clone();
+		vect3.applyMatrix4(this.matrixWorld);
+		vect3.y += 1;
 		//vect3.getPositionFromMatrix(this.worldMatrix);
 		var vect2 = toXYCoords(vect3);
 		var text2 = $('#pyramid' + i);
