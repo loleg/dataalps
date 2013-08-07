@@ -61,8 +61,18 @@ body {
 	display: inline;
 }
 .title span { font-size:11pt; color: #a95352; font-weight:bold; }
+
 .ghost {
-	    position: fixed;
-	    left: 0px;
-	    top: 0px;
-	}
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+.labels div {
+	position: absolute;
+	text-align:right;
+	border-top:1px solid white;
+}
+.labels div span {
+	background: #fff;
+}

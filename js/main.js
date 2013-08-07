@@ -430,15 +430,13 @@ function renderOverlay() {
 		if (text2.length == 0) {
 			text2 = $('.labels')
 				.append('<div id="pyramid' + i + '"></div>')
-				.find('div:last');
-			text2.css({
-				position: 'absolute', backgroundColor: '#fff',
-				width: 100, height: 10
-			}).html(this.name);
+				.find('div:last')
+					.html("<span>" + this.name + "</span>");
 		}
 		text2.css({
 			left: vect2.x + 'px',
-			top: vect2.y + 'px'
+			top: vect2.y + 'px',
+			width: (window.innerWidth - vect2.x) + 'px'
 		});
 	});
 }
