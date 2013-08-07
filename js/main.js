@@ -89,8 +89,10 @@ function toggleRadioBtn(obj) {
 		// Things to do when clearing radio
 		//clearData();
 		clearFader = 1;
+		$('.labels').fadeOut();
 	} else {
 		$(obj).addClass('on');
+		$('.labels').fadeIn();
 	}
 	return !isOn;
 }
@@ -189,12 +191,12 @@ function renderLights(proj, features) {
 	
 			var sphere = new THREE.Mesh(new THREE.SphereGeometry(1,1,1), new THREE.MeshBasicMaterial({ color: color }));
 			sphere.overdraw = true;
-			sphere.position.set(pts[0], pts[1], -5);
+			sphere.position.set(pts[0], 3, pts[1]);
 			sphere.visible = false;
 			groupLights.add( sphere );
 						
 			var light = new THREE.PointLight( color, (intensity-0.3)*7 );
-			light.position.set(pts[0], pts[1], -5);
+			light.position.set(pts[0], 3, pts[1]);
 			light.visible = false;
 			
 			groupLights.add( light );
