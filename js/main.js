@@ -2,7 +2,7 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container, stats;
 
-var camera, controls, scene, renderer, pointLight;
+var camera, controls, scene, renderer, pointLight, projector;
 
 var pppengine = null;
 
@@ -268,7 +268,8 @@ function renderFeatures(proj, features, scene, isState) {
 		//g.position.set( centerX, centerY, 30 );		
 		//g.position.z = 0;	
 		//g.rotation.z = Math.PI;
-		g.rotation.x = Math.PI/2;
+		//g.rotation.x = Math.PI/2;
+		//g.matrix.setRotationFromEuler(g.rotation); 
 		scene.add(g);
 
 		// Assign name to this pyramid and save
@@ -283,10 +284,13 @@ function init(data) {
 
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
+	
+	// camera
 
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 2000 );
 	//camera.position.set( 201.7, 14.5, 228 );
 	
+	// controls
 	
 	controls = new THREE.OrbitControls( camera );
 	controls.addEventListener( 'change', render );
@@ -294,8 +298,12 @@ function init(data) {
 	//controls = new THREE.FirstPersonControls( camera );
 	//controls.movementSpeed = 100;
 	//controls.lookSpeed = 0.1;
+	
+	// scene
 
 	scene = new THREE.Scene();
+	
+	projector = new THREE.Projector();
 	
 	// lights
 	
@@ -384,7 +392,6 @@ function render() {
 	  camera.position.z = Math.floor(Math.sin( timer ) * 1900);
 	*/
 	
-	renderer.render( scene, camera );
 	
 	if (dataFader < 1) {
 		dataFader += 0.01 + ((dataFader)/40);
@@ -395,5 +402,41 @@ function render() {
 		clearFader -= 0.05;
 		clearData(clearFader);
 	}
+
+	renderer.render( scene, camera );
 	
+	camera.updateMatrixWorld();
+	
+	renderOverlay();
+}
+
+
+
+function toXYCoords(pos) {
+	var vector = projector.projectVector(pos.clone(), camera);
+	vector.x = (vector.x + 1)/2 * window.innerWidth;
+	vector.y = -(vector.y - 1)/2 * window.innerHeight;
+	return vector;
+}
+
+function renderOverlay() {
+	$.each(groupPyramids, function(i) {
+		var vect3 = this.geometry.vertices[4];
+		//vect3.getPositionFromMatrix(this.worldMatrix);
+		var vect2 = toXYCoords(vect3);
+		var text2 = $('#pyramid' + i);
+		if (text2.length == 0) {
+			text2 = $('.labels')
+				.append('<div id="pyramid' + i + '"></div>')
+				.find('div:last');
+			text2.css({
+				position: 'absolute', backgroundColor: '#fff',
+				width: 100, height: 10
+			}).html(this.name);
+		}
+		text2.css({
+			left: vect2.x + 'px',
+			top: vect2.y + 'px'
+		});
+	});
 }
