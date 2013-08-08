@@ -55,12 +55,12 @@ body {
 	border: none; background:transparent;
 	border-radius:3px; padding:5px;
 	box-shadow: inset 2px 2px 3px #fff; }
-.legend .on { box-shadow: inset 2px 2px 3px #a95352; font-weight:bold; }
+.legend .on { box-shadow: inset 2px 2px 3px #E61414; font-weight:bold; }
 .legend .title {
 	margin-right: 2em;
 	display: inline;
 }
-.title span { font-size:11pt; color: #a95352; font-weight:bold; }
+.title span { font-size:11pt; color: #E61414; font-weight:bold; }
 
 .ghost {
     position: fixed;
