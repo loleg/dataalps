@@ -76,3 +76,8 @@ body {
 .labels div span {
 	background: #fff;
 }
+
+.toolbar span {
+	border-right:1px solid black;
+	margin-right:1em;
+}
