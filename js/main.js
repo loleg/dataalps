@@ -267,16 +267,26 @@ function renderFeatures(proj, features, scene, isState) {
 			new THREE.Vector3( centerX, centerY, -1 )
 		];
 		var pGeometry = new THREE.ConvexGeometry(points);
-		for (var i = 0; i < 4; i++) {
-			pGeometry.faces[i].color.setRGB(0, 0, 0);
-		}	pGeometry.faces[4].color.setRGB(255, 255, 255);
-
-		var pyramid = new THREE.Mesh(pGeometry, 
-				new THREE.MeshLambertMaterial({
+		
+		// create pyramid material
+		var pGradient = [];
+		for (var i = 0; i < 3; i++) {
+			pGradient.push(new THREE.Color( Math.random()*0xffffff ));
+		}	pGradient.push(new THREE.Color( 0xa95352 ));
+		
+		// copy the colors to each face's vertexColors array.
+		$.each(pGeometry.faces, function() {
+		    if (this instanceof THREE.Face3) {
+		    	this.vertexColors = pGradient;
+		    }
+		});
+		
+		var pMaterial = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
+		/*var pMaterial = new THREE.MeshLambertMaterial({
 					wireframe: false, transparent: true, opacity: 0, 
-					color: colors[groupMap.length % colors.length],
-					vertexColors: THREE.FaceColors }) );
-
+					color: colors[groupMap.length % colors.length] }) );
+*/
+		var pyramid = new THREE.Mesh(pGeometry, pMaterial);
 
 		//pyramid.position.set( centerX, centerY, 30 );		
 		//pyramid.position.z = 0;	
