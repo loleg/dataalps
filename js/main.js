@@ -123,10 +123,18 @@ function applyData(source, column, multiplier) {
 function renderData(amount) {
 	if (typeof amount == 'undefined') amount = dataFader;
 	$.each(groupPyramids, function() {
-		this.geometry.vertices[4].z = -(this.datavalue * amount);
-		this.geometry.verticesNeedUpdate = true;
-		
-		this.material.opacity = amount * 0.9;
+		if (this.datavalue) {
+			this.geometry.vertices[4].z = -(this.datavalue * amount);
+			this.geometry.verticesNeedUpdate = true;
+			var hsv = this.material.color.getHSV();
+			var vv = .3 + (this.datavalue / 90);
+			if (vv > 1) vv = 1;
+			this.material.color.setHSV(hsv.h, hsv.s, vv);
+			console.log(this.datavalue / 70);
+			this.material.opacity = amount * 0.9;
+		} else {
+			this.material.opacity = 0;
+		}
 	});
 }
 
@@ -222,83 +230,55 @@ function renderFeatures(proj, features, scene, isState) {
 	}
 	
 	var poly = polygons[0];
-	//$.each(polygons, function(i, poly) {
-		var shape = new THREE.Shape(poly[0]);
-		//var centr = computeCentroid(poly[0]);
+	var shape = new THREE.Shape(poly[0]);
+	//var centr = computeCentroid(poly[0]);
+	/*if (poly.length > 1) {
+		shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
+	}*/
 
-		if (poly.length > 1) {
-			shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
-		}
+	var geometry = new THREE.ExtrudeGeometry(shape, { 
+		amount: 20, 
+		bevelEnabled: false
+	});
+	var geoShape = new THREE.Mesh(geometry, 
+			new THREE.MeshLambertMaterial({
+				//wireframe: true,
+				color: colors[groupMap.length % colors.length] }) );
 
-		var geometry = new THREE.ExtrudeGeometry(shape, { 
-			amount: 20, 
-			bevelEnabled: false
-		});
-		var c = new THREE.Mesh(geometry, 
-				new THREE.MeshLambertMaterial({
-					//wireframe: true,
-					color: colors[groupMap.length % colors.length] }) );
+	geoShape.rotation.x = Math.PI/2;
+	geoShape.matrixAutoUpdate = false;
+	geoShape.updateMatrix();
+	scene.add(geoShape);
 
-		c.rotation.x = Math.PI/2;
-		//c.rotation.z = Math.PI;
-		//c.rotation.y = Math.PI;
-		//c.translateX(-290);
-		//c.translateZ(50);
-		//c.translateY(5);
-		c.matrixAutoUpdate = false;
-		c.updateMatrix();
-		scene.add(c);
-		//THREE.GeometryUtils.merge(groupMap, c);
+	// Assign name to this group and save
+	geoShape.name = feature.properties.name;
+	groupMap.push(geoShape);
 
-		// Assign name to this pyramid and save
-		c.name = feature.properties.name;
-		groupMap.push(c);
+	// Create geometry from geoShape's bounding box
+	geometry.computeBoundingBox();
+	var centerX = geometry.boundingBox.min.x + 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+	var centerY = geometry.boundingBox.min.y + 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
+	var points = [
+		new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.min.y, 0 ),
+		new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.max.y, 0 ),
+		new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.max.y, 0 ),
+		new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
+		new THREE.Vector3( centerX, centerY, -1 )
+	];
 
-		geometry.computeBoundingBox();
+	// Set up geometry and configure material
+	var pGeometry = new THREE.ConvexGeometry(points);
+	var pMaterial = new THREE.MeshLambertMaterial({
+				wireframe: false, transparent: true, opacity: 0, 
+				color: colors[groupMap.length % colors.length] });
 
-		var centerX = geometry.boundingBox.min.x + 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-		var centerY = geometry.boundingBox.min.y + 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
+	var pyramid = new THREE.Mesh(pGeometry, pMaterial);
+	pyramid.rotation.x = Math.PI/2;
+	scene.add(pyramid);
 
-		var points = [
-			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.min.y, 0 ),
-			new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.max.y, 0 ),
-			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.max.y, 0 ),
-			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
-			new THREE.Vector3( centerX, centerY, -1 )
-		];
-		var pGeometry = new THREE.ConvexGeometry(points);
-		
-		// create pyramid material
-		var pGradient = [];
-		for (var i = 0; i < 3; i++) {
-			pGradient.push(new THREE.Color( Math.random()*0xffffff ));
-		}	pGradient.push(new THREE.Color( 0xa95352 ));
-		
-		// copy the colors to each face's vertexColors array.
-		$.each(pGeometry.faces, function() {
-		    if (this instanceof THREE.Face3) {
-		    	this.vertexColors = pGradient;
-		    }
-		});
-		
-		var pMaterial = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
-		/*var pMaterial = new THREE.MeshLambertMaterial({
-					wireframe: false, transparent: true, opacity: 0, 
-					color: colors[groupMap.length % colors.length] }) );
-*/
-		var pyramid = new THREE.Mesh(pGeometry, pMaterial);
-
-		//pyramid.position.set( centerX, centerY, 30 );		
-		//pyramid.position.z = 0;	
-		//pyramid.rotation.z = Math.PI;
-		pyramid.rotation.x = Math.PI/2;
-		//pyramid.matrix.setRotationFromEuler(pyramid.rotation); 
-		scene.add(pyramid);
-
-		// Assign name to this pyramid and save
-		pyramid.name = feature.properties.name;
-		groupPyramids.push(pyramid);
-	//});
+	// Assign name to this pyramid and save
+	pyramid.name = feature.properties.name;
+	groupPyramids.push(pyramid);
   });
 }
 
