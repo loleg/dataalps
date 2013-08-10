@@ -266,21 +266,28 @@ function renderFeatures(proj, features, scene, isState) {
 			new THREE.Vector3( geometry.boundingBox.max.x, geometry.boundingBox.min.y, 0 ),
 			new THREE.Vector3( centerX, centerY, -1 )
 		];
+		var pGeometry = new THREE.ConvexGeometry(points);
+		for (var i = 0; i < 4; i++) {
+			pGeometry.faces[i].color.setRGB(0, 0, 0);
+		}	pGeometry.faces[4].color.setRGB(255, 255, 255);
 
-		var g = new THREE.Mesh(new THREE.ConvexGeometry( points ), 
+		var pyramid = new THREE.Mesh(pGeometry, 
 				new THREE.MeshLambertMaterial({
 					wireframe: false, transparent: true, opacity: 0, 
-					color: colors[groupMap.length % colors.length] }) );
-		//g.position.set( centerX, centerY, 30 );		
-		//g.position.z = 0;	
-		//g.rotation.z = Math.PI;
-		g.rotation.x = Math.PI/2;
-		//g.matrix.setRotationFromEuler(g.rotation); 
-		scene.add(g);
+					color: colors[groupMap.length % colors.length],
+					vertexColors: THREE.FaceColors }) );
+
+
+		//pyramid.position.set( centerX, centerY, 30 );		
+		//pyramid.position.z = 0;	
+		//pyramid.rotation.z = Math.PI;
+		pyramid.rotation.x = Math.PI/2;
+		//pyramid.matrix.setRotationFromEuler(pyramid.rotation); 
+		scene.add(pyramid);
 
 		// Assign name to this pyramid and save
-		g.name = feature.properties.name;
-		groupPyramids.push(g);
+		pyramid.name = feature.properties.name;
+		groupPyramids.push(pyramid);
 	//});
   });
 }
