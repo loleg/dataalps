@@ -130,7 +130,7 @@ function renderData(amount) {
 			var vv = .3 + (this.datavalue / 90);
 			if (vv > 1) vv = 1;
 			this.material.color.setHSV(hsv.h, hsv.s, vv);
-			console.log(this.datavalue / 70);
+			//console.log(this.datavalue / 70);
 			this.material.opacity = amount * 0.9;
 		} else {
 			this.material.opacity = 0;
