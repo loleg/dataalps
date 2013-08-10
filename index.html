@@ -12,7 +12,7 @@
 			Click and drag to turn, use your mousewheel to zoom
 		</div>
 
-		<div class="ghost" id="ghost">
+		<div class="ghost" id="ghost" style="display:none">
 			<a href="http://make.opendata.ch" target="_blank"><img src="res/okcon1.png"></a><br/>
 			<a href="http://okcon.org" id="okcon" target="_blank"><img src="res/okcon2.png"></a>
 		</div>
@@ -26,13 +26,14 @@
 			</a>
 			<div class="title">
 				<span>Swiss Open Data Alps</span>
-				v0.4
+				v0.5
 				<a href="http://github.com/loleg/dataalps" target="_blank">Source</a>
 			</div>
 			<div class="toolbar" style="display:inline-block">
 				<span>
 				<a href="http://map.geo.admin.ch" target="_blank">Map</a>
 				<button class="geoadmin">&copy; Swisstopo</button>
+				<button class="maplabels">Labels</button>
 				</span><span>
 				<a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen/01.html" target="_blank">Population</a>
 				<button class="population radio">2013</button>
@@ -62,7 +63,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="lib/jquery-1.9.1.min.js"><\/script>')</script>
 						
-		<script type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>
+		<sscript type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>
 		
 		<script src="js/geoadmin.js"></script>
 		<script src="js/main.js"></script>

@@ -68,6 +68,12 @@ $('#legendbox .heatmap').click(function() {
 	groupLights.visible = state;
 	pointLight.visible = !state;
 });
+$('#legendbox .maplabels').click(function() {
+	if (toggleDataBtn(this))
+		$('.labels').fadeIn();
+	else
+		$('.labels').fadeOut();
+});
 
 // Fade out help after a few seconds
 setTimeout(function() {
@@ -89,10 +95,8 @@ function toggleRadioBtn(obj) {
 		// Things to do when clearing radio
 		//clearData();
 		clearFader = 1;
-		$('.labels').fadeOut();
 	} else {
 		$(obj).addClass('on');
-		$('.labels').fadeIn();
 	}
 	return !isOn;
 }
@@ -425,7 +429,7 @@ function renderOverlay() {
 		this.updateMatrixWorld();
 		var vect3 = this.geometry.vertices[4].clone();
 		vect3.applyMatrix4(this.matrixWorld);
-		vect3.y += 1;
+		vect3.x += 1;
 		//vect3.getPositionFromMatrix(this.worldMatrix);
 		var vect2 = toXYCoords(vect3);
 		var text2 = $('#pyramid' + i);
