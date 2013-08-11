@@ -61,13 +61,13 @@
       }
   },
   { "type": "Feature",
-      "geometry": {"type": "Point", "coordinates": [9.0791871,44.9617269]},
+      "geometry": {"type": "Point", "coordinates": [9.148333,46.351111]},
       "properties": {
 		"ID":9870,
 		"Abbr":"BUF",
 		"Name":"Buffalora ",
-		"geo_longitude":9.0791871,
-		"geo_latitude":44.9617269,
+		"geo_longitude":9.148333,
+		"geo_latitude":46.351111,
 		"geo_accuracy":"hamlet",
 		"TempTrend":null
       }
@@ -301,13 +301,13 @@
       }
   },
   { "type": "Feature",
-      "geometry": {"type": "Point", "coordinates": [9.4017411,44.570083]},
+      "geometry": {"type": "Point", "coordinates": [9.622223,46.352779]},
       "properties": {
           "ID":9745,
     "Abbr":"LOE",
     "Name":"Vicosoprano",
-    "geo_longitude":9.4017411,
-    "geo_latitude":44.570083,
+    "geo_longitude":9.622223,
+    "geo_latitude":46.352779,
     "geo_accuracy":"hamlet",
     "TempTrend":0.33
       }
@@ -421,13 +421,13 @@
       }
   },
   { "type": "Feature",
-      "geometry": {"type": "Point", "coordinates": [-117.2897652,34.1083449]},
+      "geometry": {"type": "Point", "coordinates": [9.192226,46.462493]},
       "properties": {
           "ID":9130,
     "Abbr":"SBE",
     "Name":"S. Bernardino ",
-    "geo_longitude":-117.2897652,
-    "geo_latitude":34.1083449,
+    "geo_longitude":9.192226,
+    "geo_latitude":46.462493,
     "geo_accuracy":"city",
     "TempTrend":0.31
       }

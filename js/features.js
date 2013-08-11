@@ -49,15 +49,16 @@ function renderLights(proj, features) {
 		var intensity = feature.properties.TempTrend;
 		if (intensity != null) {
 	
-			var color = (intensity < 0.3) ? 0x00ff00 : (intensity > 0.42) ? 0xff0000 : 0xffff00;
+			var color = (intensity < 0.3) ? 0x0055aa : (intensity > 0.42) ? 0xff3333 : 0xdddd00;
 	
-			var sphere = new THREE.Mesh(new THREE.SphereGeometry(1,1,1), new THREE.MeshBasicMaterial({ color: color }));
+			var sphere = new THREE.Mesh(new THREE.SphereGeometry(1,1,1), 
+							new THREE.MeshBasicMaterial({ color: color }));
 			sphere.overdraw = true;
 			sphere.position.set(pts[0], 3, pts[1]);
 			sphere.visible = false;
 			groupLights.add( sphere );
 						
-			var light = new THREE.PointLight( color, (intensity-0.3)*7 );
+			var light = new THREE.PointLight( color, 0.8 );
 			light.position.set(pts[0], 3, pts[1]);
 			light.visible = false;
 			
