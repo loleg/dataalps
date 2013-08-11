@@ -39,9 +39,9 @@ $(document).ready(function() {
 		
 		$(mapData).each(function(i) {
 			var tile = this;
-			console.log("Adding tile #" + i + " w:" + tile.w + " h:" + tile.h + " url:" + tile.s);	
+			//console.log("Adding tile #" + i + " w:" + tile.w + " h:" + tile.h + " url:" + tile.s);	
 			var tex = THREE.ImageUtils.loadTexture(tile.s, {}, function() {
-				console.log("Loaded tile #" + i);
+				//console.log("Loaded tile #" + i);
 				var plane = new THREE.Mesh(new THREE.PlaneGeometry(tile.w, tile.h), 
 					new THREE.MeshBasicMaterial({ 
 						map: tex,

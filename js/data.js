@@ -1,6 +1,8 @@
 var SwissPopulationBFS = null,
 	SwissCommutersBFS = null,
-	SwissHeatmap = null;
+	SwissHeatmap = null,
+	SwissHeightmap = null,
+	SetupHeightMap = null;
 
 // Load data sources
 $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
@@ -17,7 +19,8 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 				init(geodata);
 				animate();
 				clearData();
-			
+
+				SwissHeightmap = createHeightMap('data/height/CH.jpg');
 			});
 		});
 	});

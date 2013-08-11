@@ -15,8 +15,9 @@ $('#legendbox .commuting').click(function() {
 			});
 });
 $('#legendbox .heatmap').click(function() {
-	var state = toggleDataBtn(this);
 	if (groupLights == null) return;
+	if (SetupHeightMap != null) return;
+	var state = toggleDataBtn(this);
 	groupLights.children.forEach(function(n) { n.visible = state });
 	groupLights.visible = state;
 	pointLight.visible = !state;
@@ -26,6 +27,9 @@ $('#legendbox .maplabels').click(function() {
 		$('.labels').fadeIn();
 	else
 		$('.labels').fadeOut();
+});
+$('#legendbox .heightmap').click(function() {
+	toggleHeightMap(toggleDataBtn(this));
 });
 
 // Fade out help after a few seconds

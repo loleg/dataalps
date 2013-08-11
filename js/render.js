@@ -2,7 +2,7 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container, stats;
 
-var camera, controls, scene, renderer, pointLight, projector;
+var camera, controls, scene, renderer, pointLight, projector, projectorGeom;
 
 var pppengine = null;
 
@@ -59,17 +59,13 @@ function init(data) {
 	scene.add( pointLight );
 
 	//scene.fog = new THREE.FogExp2(0xa95352, 0.0005);
-		
-	// textures
-	
-	
+    //scene.fog = new THREE.FogExp2( 0xcccccc );
 	
 	// geometry
 	
-	var projG = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
-	
-	renderFeatures(projG, data.features, scene, false);
-	renderLights(projG, SwissHeatmap.features);
+	projectorGeom = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
+	renderFeatures(projectorGeom, data.features, scene, false);
+	renderLights(projectorGeom, SwissHeatmap.features);
 	camera.lookAt(groupMap[0]);	
 
 	// renderer
@@ -109,31 +105,18 @@ function animate() {
 
 	requestAnimationFrame( animate );
 	render();
-	//stats.update();
 	controls.update();
+	//stats.update();
 	
-	var dt = clock.getDelta();
-	if (pppengine != null)
+	if (pppengine != null) {
+		var dt = clock.getDelta();
 		pppengine.update( dt * 0.5 );
+	}
 
 }
 
 function render() {
 
-	//plane.rotation.y = cube.rotation.y += ( targetRotation - cube.rotation.y ) * 0.05;
-	
-	//controls.update( clock.getDelta() );
-	
-	/*
-	 camera.lookAt( scene.position );
-
-	  var timer = new Date().getTime() * 0.0005;
-	 
-	  camera.position.x = Math.floor(Math.cos( timer ) * 1900);
-	  camera.position.z = Math.floor(Math.sin( timer ) * 1900);
-	*/
-	
-	
 	if (dataFader < 1) {
 		dataFader += 0.01 + ((dataFader)/40);
 		renderData();
