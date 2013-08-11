@@ -45,7 +45,7 @@ function applyData(source, column, multiplier) {
 function renderData(amount) {
 	if (typeof amount == 'undefined') amount = dataFader;
 	$.each(groupPyramids, function() {
-		if (this.datavalue && (this.datavalue * amount)>0.1) {
+		if (this.datavalue && (this.datavalue * amount)>0.3) {
 			this.geometry.vertices[4].z = -(this.datavalue * amount);
 			this.geometry.verticesNeedUpdate = true;
 			var hsv = this.material.color.getHSV();

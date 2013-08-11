@@ -1,7 +1,7 @@
 // Set up data source links
 $('#legendbox .population').click(function() {
 	if (toggleRadioBtn(this))
-		applyData(SwissPopulationBFS, $(this).html(), 
+		applyData(SwissPopulationBFS, $(this).attr("data-year"), 
 			function() { return CONF.PopulationScale; });
 });
 $('#legendbox .commuting').click(function() {
