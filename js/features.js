@@ -49,7 +49,8 @@ function renderLights(proj, features) {
 		var intensity = feature.properties.TempTrend;
 		if (intensity != null) {
 	
-			var color = (intensity < 0.3) ? 0x0055aa : (intensity > 0.42) ? 0xff3333 : 0xdddd00;
+			var color = (intensity < 0.30) ? 0x0055aa : 
+						(intensity > 0.42) ? 0xff3333 : 0xdddd00;
 	
 			var sphere = new THREE.Mesh(new THREE.SphereGeometry(1,1,1), 
 							new THREE.MeshBasicMaterial({ color: color }));
@@ -79,31 +80,39 @@ function renderFeatures(proj, features, scene, isState) {
 	if (feature.geometry.type != 'MultiPolygon') {
 	  polygons = [polygons];
 	}
-	
-	var poly = polygons[0];
-	var shape = new THREE.Shape(poly[0]);
-	//var centr = computeCentroid(poly[0]);
-	/*if (poly.length > 1) {
-		shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
-	}*/
+	var geometry = null;
+	$.each(polygons, function() {
 
-	var geometry = new THREE.ExtrudeGeometry(shape, { 
-		amount: 20, 
-		bevelEnabled: false
+		var poly = this; //polygons[0];
+		var shape = new THREE.Shape(poly[0]);
+		//var centr = computeCentroid(poly[0]);
+		/*if (poly.length > 1) {
+			shape.holes = poly.slice(1).map(function(item) { return new THREE.Shape(item); });
+		}*/
+
+		var geoShape = new THREE.Mesh(
+				new THREE.ExtrudeGeometry(shape, { 
+					amount: 20, 
+					bevelEnabled: false
+				}), 
+				new THREE.MeshLambertMaterial({
+					//wireframe: true, color: Math.random() * 0xffffff }) );
+					color: colors[groupMap.length % colors.length] }) );
+
+		geoShape.rotation.x = Math.PI/2;		
+		geoShape.matrixAutoUpdate = false;
+		geoShape.updateMatrix();
+		scene.add(geoShape);
+
+		// Assign name to this group and save
+		geoShape.name = feature.properties.name;
+		groupMap.push(geoShape);
+
+		if (geometry == null) { geometry = geoShape.geometry };
+
+		// Hide Appenzeller's shape due to buggy display
+		if (geoShape.name.indexOf('Appenzell')>-1) { geoShape.material.visible = false };
 	});
-	var geoShape = new THREE.Mesh(geometry, 
-			new THREE.MeshLambertMaterial({
-				//wireframe: true,
-				color: colors[groupMap.length % colors.length] }) );
-
-	geoShape.rotation.x = Math.PI/2;
-	geoShape.matrixAutoUpdate = false;
-	geoShape.updateMatrix();
-	scene.add(geoShape);
-
-	// Assign name to this group and save
-	geoShape.name = feature.properties.name;
-	groupMap.push(geoShape);
 
 	// Create geometry from geoShape's bounding box
 	geometry.computeBoundingBox();
