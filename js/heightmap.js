@@ -46,6 +46,7 @@ function createHeightMap(url) {
         uniforms:uniformsTerrain,
         vertexShader:terrainShader.vertexShader,
         fragmentShader:terrainShader.fragmentShader,
+        wireframe:true,
         lights:true,
         fog:false
     });
@@ -77,7 +78,7 @@ function toggleHeightMap(state) {
         pointLight.position.y = 160;
         pointLight.intensity = 8;*/
         scene.remove(groupLights);
-        $.each(groupMap, function() { this.visible = false; })
+        //$.each(groupMap, function() { this.visible = false; })
         scene.add(SwissHeightmap);
     } else {
         pointLight.position.x = SetupHeightMap.plx;
@@ -85,7 +86,7 @@ function toggleHeightMap(state) {
         pointLight.intensity = SetupHeightMap.ins;
         SetupHeightMap = null;
         scene.remove(SwissHeightmap);
-        $.each(groupMap, function() { this.visible = true; })
+        //$.each(groupMap, function() { this.visible = true; })
         scene.add(groupLights);
     }
 }
