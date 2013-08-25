@@ -16,7 +16,7 @@ $('#legendbox .commuting').click(function() {
 });
 $('#legendbox .heatmap').click(function() {
 	if (groupLights == null) return;
-	if (SetupHeightMap != null) return;
+	if (SetupHeightMap != null) $('#legendbox .heightmap').click();
 	var state = toggleDataBtn(this);
 	groupLights.children.forEach(function(n) { n.visible = state });
 	groupLights.visible = state;
@@ -29,6 +29,7 @@ $('#legendbox .maplabels').click(function() {
 		$('.labels').fadeOut();
 });
 $('#legendbox .heightmap').click(function() {
+	if (groupLights.visible) $('#legendbox .heatmap').click();
 	toggleHeightMap(toggleDataBtn(this));
 });
 

@@ -2,10 +2,10 @@
 function createHeightMap(url) {
 
     // load the heightmap we created as a texture
-    var texture = THREE.ImageUtils.loadTexture('data/height/CH.jpg');
+    var texture = THREE.ImageUtils.loadTexture('data/height/ch-contours-bw.png');
 
     // load two other textures we'll use to make the map look more real
-    var detailTexture = THREE.ImageUtils.loadTexture("data/height/bg.jpg");
+    var detailTexture = THREE.ImageUtils.loadTexture("data/height/ch-contours.png");
 
     // the following configuration defines how the terrain is rendered
     var terrainShader = THREE.ShaderTerrain[ "terrain" ];
@@ -53,16 +53,16 @@ function createHeightMap(url) {
 
     // we use a plane to render as terrain
     HeightmapRes = 128;
-    var geometry = new THREE.PlaneGeometry(410, 300, HeightmapRes, HeightmapRes);
+    var geometry = new THREE.PlaneGeometry(426, 300, HeightmapRes, HeightmapRes);
     geometry.computeFaceNormals();
     geometry.computeVertexNormals();
     geometry.computeTangents();
 
     // create a 3D object to add
     var terrain = new THREE.Mesh(geometry, material);
-    terrain.position.set(0, 0.2, 5);
+    terrain.position.set(0, 0, -0.2);
     terrain.rotation.x = -Math.PI / 2;
-    terrain.scale.setLength(0.6);
+    terrain.scale.setLength(0.8);
 
     return terrain;
 }
