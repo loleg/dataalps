@@ -113,6 +113,8 @@ function animate() {
 		pppengine.update( dt * 0.5 );
 	}
 
+	if (typeof animator === 'function') { animator(); }
+
 }
 
 function render() {

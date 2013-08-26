@@ -1,0 +1,32 @@
+
+             _  /\_   _             _      __/\ 
+           _| |/___\_| |_ ___/\___/| | ___/ ___\_
+          / . |<_> | | | <_> |<_> || || . \<_-<  \_
+       _/ \___|<___| |_|\<___|<___||_||  _//__/\_  \
+      / d e m o d a y s  \ 2013    |_| ~ seism   \  
+                                        patsch ~
+ // About \\
+ 
+   Interactive visualization of geographic and statistical data in 3D using 
+   WebGL, GeoJSON and OpenLayers. For more information on this visualization 
+   and the data used in this demo, please visit the project wiki: 
+   http://make.opendata.ch/wiki/project:dataalps
+
+ // Sources \\ 
+   
+   Created using THREE.js, D3.js, 
+   fitprojection: https://gist.github.com/1756257
+   Demodays 2013 Special Edition featuring 
+   Lee Stemkoski's Particle Engine: http://www.adelphi.edu/~stemkoski/
+
+ // Credits \\
+
+  * Hafenplatz Soundscape on SoundCloud: https://soundcloud.com/patsch/hafenplatz-basel
+  * Map and Height-map: https://github.com/interactivethings/swiss-maps
+  * Population projections: http://www.bfs.admin.ch/bfs/portal/de/index/themen/01/03/blank/key_kant/01.html
+  * Temperature trends: http://www.meteoschweiz.admin.ch/web/en/climate/climate_today/trends_from_stations.html
+
+ // License \\
+
+  This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+  http://creativecommons.org/licenses/by-nc-sa/3.0/).

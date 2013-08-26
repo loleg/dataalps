@@ -42,10 +42,7 @@ function renderLights(proj, features) {
 	if (groupLights != null) return;
 	groupLights = new THREE.Object3D();
 	$.each(features, function(i, feature) {
-		var pts = proj(feature.geometry.coordinates);
-	  	var vect = new THREE.Vector2();
-		//console.log(feature.geometry.coordinates, vect);
-		
+		var pts = proj(feature.geometry.coordinates);		
 		var intensity = feature.properties.TempTrend;
 		if (intensity != null) {
 	

@@ -25,8 +25,8 @@
 				<img src="res/github-256-black.png">
 			</a>
 			<div class="title">
-				<span>dataalps</span>
-				<small><a href="http://demodays.org" target="_blank">#Demodays2013</a> Edition</small>
+				<span>Swiss Open Data Alps</span>
+				<a href="http://demodays.org" target="_blank">#Demodays2013 Edition</a>
 			</div>
 			<div class="toolbar" style="display:inline-block">
 				<span>
@@ -62,11 +62,8 @@
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="lib/jquery-1.9.1.min.js"><\/script>')</script>
-						
-		<sciprt script type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>
-		
+
 		<script src="js/config.js"></script>
-		<script src="js/geoadmin.js"></script>
 		<script src="js/heightmap.js"></script>
 		<script src="js/render.js"></script>
 		<script src="js/ui.js"></script>
@@ -97,6 +94,42 @@
 				audio.pause();
 			}
 		});
+
+		var deepole, deeflag;
+		var deeflagTexture = THREE.ImageUtils.loadTexture("res/buenzli.png");
+		setTimeout(function() {
+
+			var pts = projectorGeom([7.9, 47.35]);		
+			deepole = new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.5,40), 
+						new THREE.MeshBasicMaterial({ color: 0xff1111 }));
+			deepole.overdraw = true;
+			deepole.position.set(pts[0], 10, pts[1]);
+			scene.add(deepole);
+
+			var flag = new THREE.PlaneGeometry(14, 10);
+			flag.computeBoundingBox();
+			var bb = flag.boundingBox.min;
+			flag.applyMatrix( new THREE.Matrix4().makeTranslation( bb.x, bb.y, bb.z ) );
+			flag.computeBoundingBox();
+			deeflag = new THREE.Mesh(flag,
+						new THREE.MeshPhongMaterial( { color: 0xffffff, map: deeflagTexture } ))
+			deeflag.material.side = THREE.DoubleSide;
+			deeflag.material.opacity = 0.7;
+			deeflag.material.transparent = false;
+			deeflag.position.set(pts[0], 30, pts[1]);
+			deeflag._rsteps = 0;
+			scene.add(deeflag);
+
+		}, 500);
+		function animator() {
+			if (typeof deeflag == 'undefined') return;
+			if (deeflag._rsteps == 0) {
+				deeflag._rspeed = (Math.random()*0.2)-0.1;
+				deeflag._rsteps = parseInt(Math.random()*15);
+			}
+			deeflag.rotation.y += deeflag._rspeed;
+			deeflag._rsteps--;
+		}
 		</script>
 	</body>
 </html>
