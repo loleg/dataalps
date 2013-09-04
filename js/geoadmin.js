@@ -1,5 +1,4 @@
 var map, api14, mapData = null, map3D = null;
-var cantonGenf = null;
 $(document).ready(function() {
 
 	// Initialize Swiss map
@@ -66,13 +65,19 @@ $(document).ready(function() {
 		map3D.position.set(-100, 0.02, 156); 
 		map3D.scale.set(0.37,0.37,0.37);
 		scene.add(map3D);
-
-		groupMap.forEach(function(n) { if(n.name.indexOf('Genf')>-1) { cantonGenf = n; } });
 	});	
 });
 
+var cantonGenf = null;
 $('#okcon').hover(function() {
-	cantonGenf.material.color.setHex(0x114f48);
+	if (cantonGenf == null) {
+		groupMap.reverse().forEach(function(n) { 
+			if(n.name.indexOf('Genf')>-1) { 
+				cantonGenf = n.material;
+			}
+		});
+	} 
+	cantonGenf.color.setHex(0x114f48);
 }, function() {
-	cantonGenf.material.color.setHex(0xa95352);
+	cantonGenf.color.setHex(0xa95352);
 });

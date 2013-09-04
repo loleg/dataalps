@@ -6,12 +6,11 @@ $('#legendbox .population').click(function() {
 });
 $('#legendbox .commuting').click(function() {
 	if (toggleRadioBtn(this))
-		applyData(SwissCommutersBFS, 'TotalCommuting', 
+		applyGradient(SwissCommutersBFS, 'TotalCommuting', 
 			function(featurename) { 
-				return CONF.CommutersScale;
-				//var data1 = $.grep(SwissPopulationBFS, function(n) { 
-				//	return (featurename.indexOf(n.Kanton) > -1); });
-				//return parseInt(20000 / data1[0]['2011']); 
+				var data1 = $.grep(SwissPopulationBFS, function(n) { 
+					return (featurename.indexOf(n.Kanton) > -1); });
+				return data1[0]['2013']; 
 			});
 });
 $('#legendbox .heatmap').click(function() {

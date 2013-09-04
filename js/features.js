@@ -70,7 +70,7 @@ function renderLights(proj, features) {
 /* for each feature, find it's X/Y Path, create shape(s) with the required holes,
  * and extrude the shape */
 function renderFeatures(proj, features, scene, isState) {
-  var colors = [ 0xa95352 ];
+  var colors = [ 0xa95352, 0xa34745, 0xb05a60, 0xb04545 ];
   
   $.each(features, function(i, feature) {
 	var polygons = path(proj, feature);
@@ -126,8 +126,9 @@ function renderFeatures(proj, features, scene, isState) {
 	// Set up geometry and configure material
 	var pGeometry = new THREE.ConvexGeometry(points);
 	var pMaterial = new THREE.MeshLambertMaterial({
+				map: new THREE.Texture(), color: 0xffffff,
 				wireframe: false, transparent: true, opacity: 1, 
-				color: colors[groupMap.length % colors.length] });
+			});
 
 	var pyramid = new THREE.Mesh(pGeometry, pMaterial);
 	pyramid.rotation.x = Math.PI/2;

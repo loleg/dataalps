@@ -72,3 +72,48 @@ function clearData(amount) {
 		this.material.opacity = amount;
 	});
 }
+
+// Applies a gradient from a data source to textures
+function applyGradient(source, column, multiplier) {
+	var canvas = document.getElementById('cnv');
+	var context = canvas.getContext('2d');
+	context.rect(0, 0, canvas.width, canvas.height);
+
+	$.each(groupPyramids, function() {	
+		featurename = this.name;
+		var data1 = $.grep(source, function(n) { 
+			return (featurename.indexOf(n.Kanton) > -1); });
+		if (data1.length == 0) {
+			console.log("[Error] Could not match " + featurename);
+			return;
+		}
+		value1 = data1[0][column] / multiplier(featurename);
+		console.log("Applying data: " + featurename + " - " + value1);
+		if (value1 > 1) value1 = 0.98;
+
+		var grd = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+		grd.addColorStop(0, '#db8786');   
+		grd.addColorStop(value1, '#004CB3');
+		grd.addColorStop(value1 + 0.01, '#ffffff');
+		grd.addColorStop(1, '#ffffff');
+		context.fillStyle = grd;
+		context.fill();
+
+		this.material.map.image = canvas;
+		this.material.map.needsUpdate = true;
+	});
+}
+
+// Resets the gradient
+function clearGradients() {
+	var canvas = document.getElementById('cnv');
+	var context = canvas.getContext('2d');
+	context.rect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = '#db8786';
+	context.fill();
+
+	$.each(groupPyramids, function() {
+		this.material.map.image = canvas;
+		this.material.map.needsUpdate = true;
+	});
+}
