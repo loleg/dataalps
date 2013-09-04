@@ -21,6 +21,14 @@ body {
 	height:100% !important;
 	position:absolute !important;
 }
+#loading {
+	position: absolute;
+	top: 47%;
+	left: 50%;
+	margin-left: -8em;
+	padding: 3em;
+	border: 1px solid red;
+}
 
 #cnv, #map {
 	position:absolute; top:0px; left:0px; display:none;

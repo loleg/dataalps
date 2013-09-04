@@ -25,7 +25,6 @@ var clock = new THREE.Clock();
 
 // Main WebGL init loop
 function init(data) {
-
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 	
@@ -91,6 +90,8 @@ function init(data) {
 	//
 
 	window.addEventListener( 'resize', onWindowResize, false );
+
+	$('#loading').remove();
 
 }
 
