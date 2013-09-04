@@ -6,7 +6,9 @@ var camera, controls, scene, renderer, pointLight, projector, projectorGeom;
 
 var pppengine = null;
 
-var groupMap = [], groupPyramids = [], groupLights = null;
+var groupMap = [], groupPyramids = [], groupStatbox = [];
+
+var groupLights = null;
 
 var dataFader = 0, clearFader = 0;
 

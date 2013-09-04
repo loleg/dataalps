@@ -113,8 +113,10 @@ function renderFeatures(proj, features, scene, isState) {
 
 	// Create geometry from geoShape's bounding box
 	geometry.computeBoundingBox();
-	var centerX = geometry.boundingBox.min.x + 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-	var centerY = geometry.boundingBox.min.y + 0.5 * ( geometry.boundingBox.max.y - geometry.boundingBox.min.y );
+	var widthX =  geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+	var widthY =  geometry.boundingBox.max.y - geometry.boundingBox.min.y;
+	var centerX = geometry.boundingBox.min.x + 0.5 * widthX;
+	var centerY = geometry.boundingBox.min.y + 0.5 * widthY;
 	var points = [
 		new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.min.y, 0 ),
 		new THREE.Vector3( geometry.boundingBox.min.x, geometry.boundingBox.max.y, 0 ),
@@ -126,9 +128,8 @@ function renderFeatures(proj, features, scene, isState) {
 	// Set up geometry and configure material
 	var pGeometry = new THREE.ConvexGeometry(points);
 	var pMaterial = new THREE.MeshLambertMaterial({
-				map: new THREE.Texture(), color: 0xffffff,
-				wireframe: false, transparent: true, opacity: 1, 
-			});
+			color: 0xa95352
+		});
 
 	var pyramid = new THREE.Mesh(pGeometry, pMaterial);
 	pyramid.rotation.x = Math.PI/2;
@@ -138,5 +139,18 @@ function renderFeatures(proj, features, scene, isState) {
 	// Assign name to this pyramid and save
 	pyramid.name = feature.properties.name;
 	groupPyramids.push(pyramid);
+
+	// Create a box the same size as the pyramid
+	var boxGeometry = new THREE.CubeGeometry(widthX, widthY, 1);
+	var boxMaterial = new THREE.MeshLambertMaterial({
+			color: 0xa95352, transparent: true, opacity: 0
+		});
+	var statbox = new THREE.Mesh(boxGeometry, boxMaterial);
+	statbox.rotation.x = Math.PI/2;
+	statbox.position.x = centerX;
+	statbox.position.z = centerY;
+	statbox.name = feature.properties.name;
+	scene.add(statbox);
+	groupStatbox.push(statbox);
   });
 }

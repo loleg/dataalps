@@ -5,13 +5,11 @@ $('#legendbox .population').click(function() {
 			function() { return CONF.PopulationScale; });
 });
 $('#legendbox .commuting').click(function() {
-	if (toggleRadioBtn(this))
-		applyGradient(SwissCommutersBFS, 'TotalCommuting', 
-			function(featurename) { 
-				var data1 = $.grep(SwissPopulationBFS, function(n) { 
-					return (featurename.indexOf(n.Kanton) > -1); });
-				return data1[0]['2013']; 
-			});
+	if (toggleRadioBtn(this)) {
+		applyData(SwissPopulationBFS, '2013', 
+			function() { return CONF.PopulationScale; });
+		applyGradient(SwissCommutersBFS, 'TotalCommuting');
+	}
 });
 $('#legendbox .heatmap').click(function() {
 	if (groupLights == null) return;
@@ -49,10 +47,10 @@ function toggleRadioBtn(obj) {
 		  .find('.radio.on').removeClass('on');
 	if (isOn) {
 		// Things to do when clearing radio
-		//clearData();
 		clearFader = 1;
 	} else {
 		$(obj).addClass('on');
 	}
+	clearGradients();
 	return !isOn;
 }
