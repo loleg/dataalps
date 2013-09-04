@@ -22,6 +22,11 @@ body {
 	position:absolute !important;
 }
 
+#cnv, #map {
+	position:absolute; top:0px; left:0px; display:none;
+}
+#cnv { width:128px; height:128px; }
+
 .help, .legend {
 	padding:0.5em;
 	font-family: Monospace;
@@ -52,10 +57,17 @@ body {
 	padding-right:2em;
 }
 .legend button { 
-	border: none; background:transparent;
+	border: 1px solid #ddd; 
+	background:transparent;
 	border-radius:3px; padding:5px;
-	box-shadow: inset 2px 2px 3px #fff; }
-.legend .on { box-shadow: inset 2px 2px 3px #E61414; font-weight:bold; }
+	box-shadow: inset 2px 2px 3px #fff; 
+	font-weight: bold;
+	color: #999;
+}
+.legend .on { 
+	box-shadow: inset 2px 2px 3px #E61414;
+	color: black;
+}
 .legend .title {
 	margin-right: 2em;
 	display: inline;
@@ -78,6 +90,6 @@ body {
 }
 
 .toolbar span {
-	border-right:1px solid black;
+	/*border-right:1px solid black;*/
 	margin-right:1em;
 }
