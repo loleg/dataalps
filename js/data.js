@@ -43,7 +43,7 @@ function applyData(source, column, multiplier) {
 		this.datascale = value1;
 	});
 	if (groupPyramids[0].visible) {
-		dataFader = 0.9;
+		dataFader = 0.99;
 	} else {
 		dataFader = 0.0;
 	}

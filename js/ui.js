@@ -1,13 +1,28 @@
 // Set up data source links
+function ShowSwissPopulationBFS(year) {
+	lp = $('#legendbox .population');
+	if (year != lp.attr('data-year'))
+		lp.attr('data-year', year).html(year);
+	applyData(SwissPopulationBFS, year, 
+		function() { return CONF.PopulationScale; });
+}
 $('#legendbox .population').click(function() {
-	if (toggleRadioBtn(this))
-		applyData(SwissPopulationBFS, $(this).attr("data-year"), 
-			function() { return CONF.PopulationScale; });
+	if (toggleRadioBtn(this)) 
+		ShowSwissPopulationBFS($(this).attr("data-year"));		
 });
+var spinTimeout, SPIN_SPEED = 300;
+$('#legendbox .population-spin')
+	.bind('mousedown', function() { 
+		spinYearBtn($(this), $('#legendbox .population'));
+	})
+	.bind('mouseup mouseleave', function() { 
+		clearTimeout(spinTimeout); SPIN_SPEED = 300;
+		$(this).removeClass('on'); 
+	});
+
 $('#legendbox .commuting').click(function() {
 	if (toggleRadioBtn(this)) {
-		applyData(SwissPopulationBFS, '2013', 
-			function() { return CONF.PopulationScale; });
+		ShowSwissPopulationBFS(2011);
 		applyGradient(SwissCommutersBFS, 'TotalCommuting');
 	}
 });
@@ -53,4 +68,16 @@ function toggleRadioBtn(obj) {
 	}
 	clearGradients();
 	return !isOn;
+}
+function spinYearBtn(obj, lp) {
+	if (!lp.hasClass('on')) lp.click();
+	obj.addClass('on');
+	var nextyear = parseInt(lp.attr('data-year'));
+	nextyear += (obj.hasClass('plus')) ? 1 : -1;
+	if (typeof SwissPopulationBFS[0][nextyear] != 'undefined')
+		ShowSwissPopulationBFS(nextyear);
+	// continue cycling
+	SPIN_SPEED *= 0.9;
+	spinTimeout = setTimeout(
+		function() { spinYearBtn(lp, obj) }, SPIN_SPEED);
 }

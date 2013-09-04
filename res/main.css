@@ -64,7 +64,7 @@ body {
 	font-weight: bold;
 	color: #999;
 }
-.legend .on { 
+.legend .on, button:active { 
 	box-shadow: inset 2px 2px 3px #E61414;
 	color: black;
 }
@@ -92,4 +92,8 @@ body {
 .toolbar span {
 	/*border-right:1px solid black;*/
 	margin-right:1em;
+}
+
+button.plus, button.minus {
+	width: 2em; 
 }
