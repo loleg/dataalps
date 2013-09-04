@@ -5,7 +5,7 @@ function createHeightMap(url) {
     var texture = THREE.ImageUtils.loadTexture('data/height/ch-contours-bw.png');
 
     // load two other textures we'll use to make the map look more real
-    var detailTexture = THREE.ImageUtils.loadTexture("data/height/ch-contours.png");
+    var detailTexture = THREE.ImageUtils.loadTexture("res/snow.jpg");
 
     // the following configuration defines how the terrain is rendered
     var terrainShader = THREE.ShaderTerrain[ "terrain" ];
@@ -13,12 +13,12 @@ function createHeightMap(url) {
 
     // how to treat abd scale the normal texture
     uniformsTerrain[ "tNormal" ].value = detailTexture;
-    uniformsTerrain[ "uNormalScale" ].value = 1;
+    uniformsTerrain[ "uNormalScale" ].value = 10;
 
     // the displacement determines the height of a vector, mapped to
     // the heightmap
     uniformsTerrain[ "tDisplacement" ].value = texture;
-    uniformsTerrain[ "uDisplacementScale" ].value = 30;
+    uniformsTerrain[ "uDisplacementScale" ].value = 25;
 
     // the following textures can be use to finetune how
     // the map is shown. These are good defaults for simple
@@ -46,7 +46,7 @@ function createHeightMap(url) {
         uniforms:uniformsTerrain,
         vertexShader:terrainShader.vertexShader,
         fragmentShader:terrainShader.fragmentShader,
-        wireframe:true,
+        wireframe:false,
         lights:true,
         fog:false
     });
@@ -60,9 +60,9 @@ function createHeightMap(url) {
 
     // create a 3D object to add
     var terrain = new THREE.Mesh(geometry, material);
-    terrain.position.set(0, 0, -0.2);
+    terrain.position.set(0, -1, -2);
     terrain.rotation.x = -Math.PI / 2;
-    terrain.scale.setLength(0.8);
+    terrain.scale.setLength(0.8);    
 
     return terrain;
 }
@@ -72,21 +72,20 @@ function toggleHeightMap(state) {
         SetupHeightMap = {
             plx: pointLight.position.x,
             ply: pointLight.position.y,
+            plz: pointLight.position.z,
             ins: pointLight.intensity
         };
-        /*pointLight.position.x = -200;
-        pointLight.position.y = 160;
-        pointLight.intensity = 8;*/
+        // set the light position
+        pointLight.position.set(400,0,-200);
         scene.remove(groupLights);
-        //$.each(groupMap, function() { this.visible = false; })
         scene.add(SwissHeightmap);
     } else {
         pointLight.position.x = SetupHeightMap.plx;
         pointLight.position.y = SetupHeightMap.ply;
+        pointLight.position.z = SetupHeightMap.plz;
         pointLight.intensity = SetupHeightMap.ins;
         SetupHeightMap = null;
         scene.remove(SwissHeightmap);
-        //$.each(groupMap, function() { this.visible = true; })
         scene.add(groupLights);
     }
 }

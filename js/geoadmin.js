@@ -1,30 +1,30 @@
-var map, api14, mapData = null, map3D = null;
+var api14, SwissTopomap, SwissTopoData = null, SwissTopomap3D = null;
 $(document).ready(function() {
 
 	// Initialize Swiss map
 	if (typeof GeoAdmin == 'undefined') {
 		console.log("Unable to detect GeoAdmin API"); //return;
-		mapData = [{"x":287,"y":54,"w":256,"h":256,"s":"data/map/14-0-1.jpeg"},{"x":287,"y":310,"w":256,"h":256,"s":"data/map/14-1-1.jpeg"},{"x":31,"y":54,"w":256,"h":256,"s":"data/map/14-0-0.jpeg"},{"x":31,"y":310,"w":256,"h":256,"s":"data/map/14-1-0.jpeg"},{"x":543,"y":54,"w":256,"h":256,"s":"data/map/14-0-2.jpeg"},{"x":543,"y":310,"w":256,"h":256,"s":"data/map/14-1-2.jpeg"}];
+		SwissTopoData = [{"x":287,"y":54,"w":256,"h":256,"s":"data/map/14-0-1.jpeg"},{"x":287,"y":310,"w":256,"h":256,"s":"data/map/14-1-1.jpeg"},{"x":31,"y":54,"w":256,"h":256,"s":"data/map/14-0-0.jpeg"},{"x":31,"y":310,"w":256,"h":256,"s":"data/map/14-1-0.jpeg"},{"x":543,"y":54,"w":256,"h":256,"s":"data/map/14-0-2.jpeg"},{"x":543,"y":310,"w":256,"h":256,"s":"data/map/14-1-2.jpeg"}];
 	} else {
 		//document.querySelector('#map').style.background = "none";
 		document.querySelector('#map').style.width  = '800px';
 		document.querySelector('#map').style.height = '600px';
 		api14 = new GeoAdmin.API(); 
-		map = api14.createMap({ div: "map", zoom: 3 });
+		SwissTopomap = api14.createMap({ div: "map", zoom: 3 });
 	}
 	var btn = $('.geoadmin').click(function() {
 		var state = toggleDataBtn(this);
-		if (map3D != null) {
-			var o = state ? 0.5 : 0;
-			map3D.children.forEach(function(n) { n.material.opacity = o })
+		if (SwissTopomap3D != null) {
+			var o = state ? 1 : 0;
+			SwissTopomap3D.children.forEach(function(n) { n.material.opacity = o })
 			return;
 		}
 		
 		// Get images from map service
-		if (mapData == null) {
-			mapData = []; 
+		if (SwissTopoData == null) {
+			SwissTopoData = []; 
 			$('#OpenLayers_Layer_WMTS_104 img.olTileImage').each(function() {
-				mapData.push({
+				SwissTopoData.push({
 					x: parseInt($(this).css('left')), 
 					y: parseInt($(this).css('top')),
 					w: parseInt($(this).css('width')), 
@@ -34,9 +34,9 @@ $(document).ready(function() {
 			});
 		}
 
-		map3D = new THREE.Object3D();
+		SwissTopomap3D = new THREE.Object3D();
 		
-		$(mapData).each(function(i) {
+		$(SwissTopoData).each(function(i) {
 			var tile = this;
 			//console.log("Adding tile #" + i + " w:" + tile.w + " h:" + tile.h + " url:" + tile.s);	
 			var tex = THREE.ImageUtils.loadTexture(tile.s, {}, function() {
@@ -45,7 +45,7 @@ $(document).ready(function() {
 					new THREE.MeshBasicMaterial({ 
 						map: tex,
 						transparent: true,
-						//shading: THREE.FlatShading, 
+						shading: THREE.FlatShading, 
 						overdraw: false
 					}));
 				plane.doubleSided = false;
@@ -54,17 +54,17 @@ $(document).ready(function() {
 				plane.position.x = tile.x;
 				plane.position.y = 600-tile.y;
 				plane.material.transparent = true;
-				plane.material.opacity = 0.5;
-				map3D.add(plane);
+				plane.material.opacity = 1;
+				SwissTopomap3D.add(plane);
 			});
 			tex.needsUpdate = true;
 		});
 
 		// Obtained by trial and error..
-		map3D.rotation.x = -Math.PI/2;
-		map3D.position.set(-100, 0.02, 156); 
-		map3D.scale.set(0.37,0.37,0.37);
-		scene.add(map3D);
+		SwissTopomap3D.rotation.x = -Math.PI/2;
+		SwissTopomap3D.scale.set(0.37,0.37,0.37);
+		SwissTopomap3D.position.set(-100, 2, 156); 
+		scene.add(SwissTopomap3D);
 	});	
 });
 
