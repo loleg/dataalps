@@ -68,19 +68,39 @@ $(document).ready(function() {
 	});	
 });
 
-var cantonGenf = null, genfToggle = true;
-$('#geneva').click(function() {
-	if (cantonGenf == null) {
-		groupMap.reverse().forEach(function(n) { 
-			if(n.name.indexOf('Genf')>-1) { 
-				cantonGenf = n.material;
-			}
-		});
-	} 
-    if (genfToggle) {
-	   cantonGenf.color.setHex(0x114f48);
-    } else {
-	   cantonGenf.color.setHex(0xa95352);
+function geoShowcase(proj) {
+    // Highlight a canton
+    var cantonGenf = null, genfToggle = true;
+    //$('#geneva').click(function() {
+        if (cantonGenf == null) {
+            groupMap.reverse().forEach(function(n) { 
+                if(n.name.indexOf('Genf')>-1) { 
+                    cantonGenf = n.material;
+                }
+            });
+        } 
+        if (genfToggle) {
+           cantonGenf.color.setHex(0x114f48);
+        } else {
+           cantonGenf.color.setHex(0xa95352);
+        }
+        genfToggle = !genfToggle;
+    //});
+
+    // Find us on the map
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          function (pos) {
+            var latlon = [pos.coords.longitude, pos.coords.latitude];
+            console.log(latlon);
+            var pts = proj(latlon);	
+            var color = 0x3333ff;
+            var sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 1, 1), 
+                        new THREE.MeshBasicMaterial({ color: color }));
+            sphere.overdraw = true;
+            sphere.position.set(pts[0], 3, pts[1]);
+            sphere.visible = true;
+            scene.add( sphere );
+          });
     }
-    genfToggle = !genfToggle;
-});
+}
