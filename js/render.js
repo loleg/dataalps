@@ -74,8 +74,10 @@ function init(data) {
 
 	// renderer
 	
-	renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({ alpha: true });
 	//renderer = new THREE.CanvasRenderer();
+    
+    renderer.setClearColor( 0x000000, 0 );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 	container.appendChild( renderer.domElement );

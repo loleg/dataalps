@@ -52,14 +52,15 @@ function applyData(source, column, multiplier) {
 // Scales vertices of the map by amount (0.0 - 1.0)
 function renderData(amount) {
 	if (typeof amount == 'undefined') amount = dataFader;
+    var CC = THREE.ColorConverter;
 	$.each(groupPyramids, function() {
 		if (this.datascale && (this.datascale * amount)>0.3) {
 			this.geometry.vertices[4].z = -(this.datascale * amount);
 			this.geometry.verticesNeedUpdate = true;
-			var hsv = this.material.color.getHSV();
+			var hsv = CC.getHSV(this.material.color);
 			var vv = .3 + (this.datascale / 90);
 			if (vv > 1) vv = 1;
-			this.material.color.setHSV(hsv.h, hsv.s, vv);
+			CC.setHSV(this.material.color, hsv.h, hsv.s, vv);
 			//console.log(this.datascale / 70);
 			this.material.opacity = amount * CONF.PyramidOpacity;
 			this.visible = true;

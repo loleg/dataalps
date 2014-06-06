@@ -12,11 +12,6 @@
 			Click and drag to turn, use your mousewheel to zoom
 		</div>
 
-		<div class="ghost" id="ghost">
-			<a href="http://make.opendata.ch" target="_blank"><img src="res/okcon1.png"></a><br/>
-			<a href="http://okcon.org" id="okcon" target="_blank"><img src="res/okcon2.png"></a>
-		</div>
-
 		<div id="loading">Loading, please wait ...</div>
 		
 		<div class="legend" id="legendbox">
@@ -28,14 +23,15 @@
 			</a>
 			<div class="title">
 				<span>Swiss Open Data Alps</span>
-				<small>v0.9</small>
+				<small>v1.0</small>
 			</div>
 			<div class="toolbar" style="display:inline-block">
 				<span>
 				<a href="http://map.geo.admin.ch" target="_blank">Map</a>:
-				<button class="geoadmin">&copy; Swisstopo</button>
+                <button class="geneva" id="geneva">Geneva</button>
 				<button class="maplabels">Labels</button>
-				<button class="heatmap">Heat</button>
+				<!--<button class="geoadmin">&copy; Swisstopo</button>
+				<button class="heatmap">Heat</button>-->
 				<button class="heightmap">Height</button>
 				</span><span>
 				<a href="http://www.bfs.admin.ch/bfs/portal/de/index/themen/01.html" target="_blank">Population</a>:
@@ -58,15 +54,17 @@
 		<script src="lib/three/controls/OrbitControls.js"></script>
 		<script src="lib/three/Detector.js"></script>
 		<script src="lib/three/ShaderTerrain.js"></script>
+        <script src="lib/three/ConvexGeometry.js"></script>
+        <script src="lib/three/ColorConverter.js"></script>
 		
 		<script src="lib/d3/d3.v2.js"></script>
 		<script src="lib/d3/d3-threeD.js"></script>
 		<script src="lib/fit-projection.js"></script>
 	
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="lib/jquery-1.9.1.min.js"><\/script>')</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="lib/jquery-1.11.1.min.js"><\/script>')</script>
 						
-		<skip script type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>
+		<!--<script script type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>-->
 		
 		<script src="js/config.js"></script>
 		<script src="js/geoadmin.js"></script>

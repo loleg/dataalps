@@ -30,13 +30,13 @@ function createHeightMap(url) {
     uniformsTerrain[ "enableSpecular" ].value = true;
 
     // diffuse is based on the light reflection
-    uniformsTerrain[ "uDiffuseColor" ].value.setHex(0xcccccc);
-    uniformsTerrain[ "uSpecularColor" ].value.setHex(0xff0000);
+    //uniformsTerrain[ "uDiffuseColor" ].value.setHex(0xcccccc);
+    //uniformsTerrain[ "uSpecularColor" ].value.setHex(0xff0000);
     // is the base color of the terrain
-    uniformsTerrain[ "uAmbientColor" ].value.setHex(0x0000cc);
+    //uniformsTerrain[ "uAmbientColor" ].value.setHex(0x0000cc);
 
     // how shiny is the terrain
-    uniformsTerrain[ "uShininess" ].value = 3;
+    //uniformsTerrain[ "uShininess" ].value = 3;
 
     // handles light reflection
     uniformsTerrain[ "uRepeatOverlay" ].value.set(6, 6);

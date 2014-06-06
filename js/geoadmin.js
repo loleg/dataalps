@@ -68,8 +68,8 @@ $(document).ready(function() {
 	});	
 });
 
-var cantonGenf = null;
-$('#okcon').hover(function() {
+var cantonGenf = null, genfToggle = true;
+$('#geneva').click(function() {
 	if (cantonGenf == null) {
 		groupMap.reverse().forEach(function(n) { 
 			if(n.name.indexOf('Genf')>-1) { 
@@ -77,7 +77,10 @@ $('#okcon').hover(function() {
 			}
 		});
 	} 
-	cantonGenf.color.setHex(0x114f48);
-}, function() {
-	cantonGenf.color.setHex(0xa95352);
+    if (genfToggle) {
+	   cantonGenf.color.setHex(0x114f48);
+    } else {
+	   cantonGenf.color.setHex(0xa95352);
+    }
+    genfToggle = !genfToggle;
 });
