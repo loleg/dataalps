@@ -69,9 +69,50 @@ $(document).ready(function() {
 });
 
 function geoShowcase(proj) {
+
+    // Find us on the map
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          function (pos) {
+            var lonlat = [pos.coords.longitude, pos.coords.latitude];
+              
+            var pts = proj(lonlat);	
+            var color = 0x3333ff;
+            var sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 1, 1), 
+                        new THREE.MeshBasicMaterial({ color: color }));
+            sphere.overdraw = true;
+            sphere.position.set(pts[0], 3, pts[1]);
+            sphere.visible = true;
+            scene.add( sphere );
+          });
+    }
+    
+    // Add towers
+    $.get('data/antennes.xml', function(data) {
+        groupLights = new THREE.Object3D();
+        EPSG2056 = "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs";
+        $('osm node', data).each(function() { 
+            var lat = parseFloat($(this).attr('lat'));
+            var lon = parseFloat($(this).attr('lon'));
+            var hgt = parseInt($('tag', this).attr('v'))/10;
+            var pxy = proj4(EPSG2056, proj4.WGS84, [lon, lat]);
+            var pts = proj(pxy);	
+            var color = 0x33ff33;
+            var ssize = 0.2;
+            var sphere = new THREE.Mesh(new THREE.SphereGeometry(ssize, ssize, ssize), 
+                        new THREE.MeshBasicMaterial({ color: color }));
+            sphere.overdraw = true;
+            sphere.position.set(pts[0], hgt, pts[1]);
+            sphere.visible = true;
+            groupLights.add( sphere );
+        }); 
+        scene.add( groupLights );
+        groupLights.visible = false;
+    });
+    
     // Highlight a canton
     var cantonGenf = null, genfToggle = true;
-    //$('#geneva').click(function() {
+    $('#geneva').click(function() {
         if (cantonGenf == null) {
             groupMap.reverse().forEach(function(n) { 
                 if(n.name.indexOf('Genf')>-1) { 
@@ -85,22 +126,10 @@ function geoShowcase(proj) {
            cantonGenf.color.setHex(0xa95352);
         }
         genfToggle = !genfToggle;
-    //});
-
-    // Find us on the map
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-          function (pos) {
-            var latlon = [pos.coords.longitude, pos.coords.latitude];
-            console.log(latlon);
-            var pts = proj(latlon);	
-            var color = 0x3333ff;
-            var sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 1, 1), 
-                        new THREE.MeshBasicMaterial({ color: color }));
-            sphere.overdraw = true;
-            sphere.position.set(pts[0], 3, pts[1]);
-            sphere.visible = true;
-            scene.add( sphere );
-          });
-    }
+        
+        // Zoom to it
+        
+        // Show extra data
+        groupLights.visible = true;
+    });
 }
