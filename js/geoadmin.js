@@ -75,10 +75,12 @@ function geoShowcase(proj) {
       navigator.geolocation.getCurrentPosition(
           function (pos) {
             var lonlat = [pos.coords.longitude, pos.coords.latitude];
-              
+            
             var pts = proj(lonlat);	
+            //pts = [-91.73215684599808, 39.28542596256875]; // test
             var color = 0x3333ff;
-            var sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 1, 1), 
+            var ssize = 1;
+            var sphere = new THREE.Mesh(new THREE.SphereGeometry(ssize, ssize, ssize), 
                         new THREE.MeshBasicMaterial({ color: color }));
             sphere.overdraw = true;
             sphere.position.set(pts[0], 3, pts[1]);
