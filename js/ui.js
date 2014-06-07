@@ -45,6 +45,11 @@ $('#legendbox .heightmap').click(function() {
 	toggleHeightMap(toggleDataBtn(this));
 });
 
+$('.zoomer').click(function() {
+    if ($(this).hasClass('plus')) controls.dollyOut();
+    if ($(this).hasClass('minus')) controls.dollyIn();
+});
+
 // Fade out help after a few seconds
 setTimeout(function() { $('#helpbox').fadeOut(); }, 
 	CONF.HelpTimeout * 1000);

@@ -94,24 +94,23 @@ function geoShowcase(proj) {
         $('osm node', data).each(function() { 
             var lat = parseFloat($(this).attr('lat'));
             var lon = parseFloat($(this).attr('lon'));
-            var hgt = parseInt($('tag', this).attr('v'))/10;
+            var hgt = parseInt($('tag', this).attr('v'))/20;
             var pxy = proj4(EPSG2056, proj4.WGS84, [lon, lat]);
             var pts = proj(pxy);	
-            var color = 0x33ff33;
-            var ssize = 0.2;
-            var sphere = new THREE.Mesh(new THREE.SphereGeometry(ssize, ssize, ssize), 
+            var color = 0xffffff;
+            var ssize = 0.05;
+            var sphere = new THREE.Mesh(new THREE.BoxGeometry(ssize, ssize*5, ssize), 
                         new THREE.MeshBasicMaterial({ color: color }));
             sphere.overdraw = true;
             sphere.position.set(pts[0], hgt, pts[1]);
-            sphere.visible = true;
+            sphere.visible = false;
             groupLights.add( sphere );
         }); 
         scene.add( groupLights );
-        groupLights.visible = false;
     });
     
     // Highlight a canton
-    var cantonGenf = null, genfToggle = true;
+    var cantonGenf = null;
     $('#geneva').click(function() {
         if (cantonGenf == null) {
             groupMap.reverse().forEach(function(n) { 
@@ -120,16 +119,21 @@ function geoShowcase(proj) {
                 }
             });
         } 
-        if (genfToggle) {
-           cantonGenf.color.setHex(0x114f48);
+        if (toggleDataBtn(this)) {
+            cantonGenf.color.setHex(0x114f48);
+            // Zoom to it
+            controls.target = groupLights.children[0].position;
+            // Show extra data
+            $.each(groupLights.children,
+                   function() { this.visible = true; });
+            camera.position.set(-87.389860387223, 6.189884629236464, 49.90135314807807);
         } else {
-           cantonGenf.color.setHex(0xa95352);
+            // Reset
+            cantonGenf.color.setHex(0xa95352);
+            controls.target = groupLights.position;
+            $.each(groupLights.children,
+                   function() { this.visible = false; });
+            camera.position.set(0.3831291366180984, 126.37152933913376, 139.75796689218083);
         }
-        genfToggle = !genfToggle;
-        
-        // Zoom to it
-        
-        // Show extra data
-        groupLights.visible = true;
     });
 }
