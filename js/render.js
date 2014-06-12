@@ -66,7 +66,10 @@ function init(data) {
 	
 	projectorGeom = fitProjection(d3.geo.mercator(), data, [[-100,-75],[100,75]], true);
 	renderFeatures(projectorGeom, data.features, scene, false);
-	renderLights(projectorGeom, SwissHeatmap.features);
+
+	if (SwissHeatmap != null)
+		renderLights(projectorGeom, SwissHeatmap.features);
+	
 	geoShowcase(projectorGeom);
                  
 	clearGradients();

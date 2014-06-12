@@ -11,8 +11,9 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 	$.getJSON('data/swiss-cantons-commuters-2011.json', function(data2) {
 		SwissCommutersBFS = data2.Pendler;
 		
-		$.getJSON('data/swiss-meteo-stations.json', function(data3) {
-			SwissHeatmap = data3;
+		// TODO: fix rendering in features.js
+		//$.getJSON('data/swiss-meteo-stations.json', function(data3) {
+		//	SwissHeatmap = data3;
 		
 			$.getJSON('data/swiss-cantons-simplified.json', function(geodata) {
 
@@ -22,7 +23,7 @@ $.getJSON('data/swiss-cantons-population-bfs.json', function(data1) {
 
 				SwissHeightmap = createHeightMap('data/height/CH.jpg');
 			});
-		});
+		//});
 	});
 });
 
